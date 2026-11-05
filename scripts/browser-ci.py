@@ -143,11 +143,26 @@ try:
     run('native-input-tooling', ['sudo', 'apt-get', 'install', '-y', 'xdotool'], cap=120)
     assert vector() == baseline
     report['guards'].append({'stage': 'before-browser', 'matched': True})
-    browser = run('installed-workspace', ['node', 'tests/browser.mjs'], cap=180)
-    records = [line.removeprefix('TRACELET_BROWSER_REPORT=') for line in browser.splitlines() if line.startswith('TRACELET_BROWSER_REPORT=')]
-    assert len(records) == 1
-    report['browser'] = json.loads(records[0])
-    assert report['browser']['passed'] == 2 and report['browser']['failed'] == 0
+    scope = os.environ.get('TRACELET_CHECK_SCOPE', 'workspace-and-capture')
+    assert scope in ['workspace-and-capture', 'capture-only']
+    report['scope'] = scope
+    if scope == 'capture-only':
+        receipt_path = ROOT / 'docs/results/2026/11-05/browser-attempt-5.json'
+        receipt_bytes = receipt_path.read_bytes()
+        assert hashlib.sha256(receipt_bytes).hexdigest() == '9ed76ebbf701c709796e840748b812cbb8a3d01f8837722f3e9bed81a35b6228'
+        prior = json.loads(receipt_bytes)
+        assert prior['browser']['passed'] == 2 and prior['browser']['failed'] == 0
+        assert [(row['id'], row['status']) for row in prior['browser']['cases']] == [('B01', 'passed'), ('B02', 'passed')]
+        expected_inputs = [row for row in prior['controller']['guards'][0]['files'] if row['path'].startswith('extension/')]
+        actual_inputs = [row for row in baseline if row['path'].startswith('extension/')]
+        assert len(expected_inputs) == 12 and expected_inputs == actual_inputs, 'Workspace inputs changed; its accepted scope cannot be carried forward.'
+        report['workspacePrior'] = {'runId': prior['runId'], 'preparation': prior['preparation'], 'receiptSHA256': hashlib.sha256(receipt_bytes).hexdigest(), 'exactExtensionInputs': 12, 'notRerun': True}
+    else:
+        browser = run('installed-workspace', ['node', 'tests/browser.mjs'], cap=180)
+        records = [line.removeprefix('TRACELET_BROWSER_REPORT=') for line in browser.splitlines() if line.startswith('TRACELET_BROWSER_REPORT=')]
+        assert len(records) == 1
+        report['browser'] = json.loads(records[0])
+        assert report['browser']['passed'] == 2 and report['browser']['failed'] == 0
     capture = run('actual-tab-capture', ['xvfb-run', '-a', 'node', 'tests/capture.browser.mjs'], cap=180)
     records = [line.removeprefix('TRACELET_CAPTURE_REPORT=') for line in capture.splitlines() if line.startswith('TRACELET_CAPTURE_REPORT=')]
     assert len(records) == 1

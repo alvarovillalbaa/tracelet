@@ -7,9 +7,13 @@ and edit the checklist, export the workflow, then replay each approved step
 on the original site. No account, subscription, AI call or upload. Built from
 Alvaro's [recorder-to-task brief and implementation contract](docs/spec.md).
 
-[31 focused Node checks passed](docs/results/2026/11-05/local-checks.md).
-Installed-extension/capture acceptance is prepared separately; it is not implied
-by the protocol adapters or this source publication.
+[31 focused Node checks passed](docs/results/2026/11-05/local-checks.md), followed
+by [two installed-extension workspace journeys](docs/results/2026/11-05/browser-attempt-5.md)
+covering actual import/edit/save/reload/export/deletion. Capture/replay acceptance
+remains separate; it is not implied by the protocol adapters or workspace checks.
+
+[Download and installation](https://tracelet-three.vercel.app) ·
+[Source](https://github.com/alvarovillalbaa/tracelet)
 
 ## Install
 

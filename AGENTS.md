@@ -23,6 +23,11 @@ personal Notion portfolio, separate from Framelet's native video editor.
   source and bounded raw receipt are in `docs/results/2026/11-05/local-checks.md`.
   Keep that scope closed. Later installed-extension/capture execution has its
   own preparation and receipt rather than relabeling the Node adapters.
+- B01/B02 subsequently passed once at `45d86d7c7d18a019646d594ef6d284ed96abbf96`;
+  see `docs/results/2026/11-05/browser-attempt-5.md`. Keep these installed
+  workspace journeys closed while their twelve extension inputs are exact.
+  The current QA template is capture-only and verifies that pinned receipt/input
+  identity before executing C01. Prior failures remain immutable.
 - Source and personal GitHub publication and free static Vercel hosting are
   authorized. No store enrollment/submission or paid resource is authorized.
 - No local installs/builds/browser environments: Storage Guard on 5 November

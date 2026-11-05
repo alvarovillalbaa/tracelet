@@ -22,7 +22,8 @@ const report = { case: 'C01', status: 'failed', stage: 'preflight', observations
 ] };
 const end = Date.now() + 90_000;
 let context, contextClosing, server, owned, ownedHandle, ownedIdentity, scratchHandle, scratchIdentity;
-let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin, processBaseline;
+let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin, processBaseline, browserCDP;
+const popupAdapters = new Set();
 const hash = value => createHash('sha256').update(value).digest('hex');
 function clean(error) {
   const text = String(error?.message ?? error).replaceAll(scratch || '\u0000', '[scratch]')
@@ -154,14 +155,122 @@ async function newExtensionPage(filename, previous = new Set()) {
     && page.url().split('?')[0].split('#')[0] === `${extensionOrigin}/${filename}`), Boolean,
   `The genuine extension ${filename} page was not exposed by Chromium.`, 10_000);
 }
+async function popupTargets() {
+  return (await bounded(browserCDP.send('Target.getTargets'), 5000, 'Popup target discovery exceeded five seconds.')).targetInfos;
+}
+async function cdpPopup(target) {
+  assert.equal(target.url, `${extensionOrigin}/popup.html`);
+  assert(['other', 'page'].includes(target.type), 'The actual popup has an unsupported target type.');
+  const { sessionId } = await bounded(browserCDP.send('Target.attachToTarget', { targetId: target.targetId, flatten: false }), 5000, 'The actual popup target could not be attached.');
+  let nextId = 0, detached = false;
+  const pending = new Map();
+  function rejectPending(message) {
+    detached = true;
+    for (const item of pending.values()) { clearTimeout(item.timer); item.reject(new Error(message)); }
+    pending.clear();
+  }
+  function receive(event) {
+    if (event.sessionId !== sessionId) return;
+    if (event.message.length > 65_536) { rejectPending('Popup protocol response exceeded its bound.'); return; }
+    let message;
+    try { message = JSON.parse(event.message); } catch { rejectPending('Popup protocol response was invalid.'); return; }
+    const item = pending.get(message.id);
+    if (item) {
+      pending.delete(message.id); clearTimeout(item.timer);
+      if (message.error) item.reject(new Error(`Popup protocol ${item.method} failed: ${String(message.error.message).slice(0, 240)}`));
+      else item.resolve(message.result);
+    } else if (message.method === 'Runtime.exceptionThrown') {
+      report.observations.pageErrorCount++;
+      const text = String(message.params?.exceptionDetails?.text ?? 'Popup runtime exception');
+      if (report.observations.pageErrors.length < 4) report.observations.pageErrors.push({ message: clean(text).slice(0, 384), sha256: hash(text) });
+    }
+  }
+  function targetDetached(event) { if (event.sessionId === sessionId) rejectPending('The actual popup target detached during an operation.'); }
+  browserCDP.on('Target.receivedMessageFromTarget', receive);
+  browserCDP.on('Target.detachedFromTarget', targetDetached);
+  function command(method, params = {}) {
+    assert(!detached, 'The actual popup protocol session is no longer attached.');
+    return new Promise((resolve, reject) => {
+      const id = ++nextId;
+      const timer = setTimeout(() => { pending.delete(id); reject(new Error(`Popup protocol ${method} exceeded five seconds.`)); }, 5000);
+      pending.set(id, { resolve, reject, timer, method });
+      browserCDP.send('Target.sendMessageToTarget', { sessionId, message: JSON.stringify({ id, method, params }) }).catch(error => {
+        const item = pending.get(id); if (!item) return;
+        pending.delete(id); clearTimeout(timer); reject(error);
+      });
+    });
+  }
+  async function read(expression) {
+    const result = await command('Runtime.evaluate', { expression, returnByValue: true });
+    assert(!result.exceptionDetails, 'Reading the actual popup DOM failed.');
+    return result.result?.value;
+  }
+  const adapter = {
+    async readWarning() { return read(`(() => { const warning = document.querySelector('.privacy-note strong'); return location.href === ${JSON.stringify(target.url)} && warning?.getClientRects().length && getComputedStyle(warning).visibility !== 'hidden' ? warning.textContent.slice(0,160) : null; })()`); },
+    async readSite() { return read(`location.href === ${JSON.stringify(target.url)} ? document.querySelector('#current-site')?.textContent?.slice(0,4096) : null`); },
+    async click(selector) {
+      assert(['#start', '#stop', '#bind'].includes(selector));
+      const point = await until(() => read(`(() => {
+        if(location.href !== ${JSON.stringify(target.url)}) return null;
+        const button = document.querySelector(${JSON.stringify(selector)});
+        if(!button || button.tagName !== 'BUTTON' || button.disabled || button.hidden) return null;
+        const rect = button.getBoundingClientRect(), style = getComputedStyle(button);
+        if(rect.width <= 0 || rect.height <= 0 || style.display === 'none' || style.visibility === 'hidden') return null;
+        const x = rect.left + rect.width/2, y = rect.top + rect.height/2;
+        const hit = document.elementFromPoint(x,y);
+        return hit === button || button.contains(hit) ? {x,y} : null;
+      })()`), value => value && Number.isFinite(value.x) && Number.isFinite(value.y), 'The actual popup control did not become visible and enabled.', 5000);
+      await command('Input.dispatchMouseEvent', { type: 'mousePressed', x: point.x, y: point.y, button: 'left', buttons: 1, clickCount: 1 });
+      await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: point.x, y: point.y, button: 'left', buttons: 0, clickCount: 1 });
+    },
+    async isClosed() { return !(await popupTargets()).some(item => item.targetId === target.targetId); },
+    async dispose() {
+      browserCDP.removeListener('Target.receivedMessageFromTarget', receive);
+      browserCDP.removeListener('Target.detachedFromTarget', targetDetached);
+      rejectPending('Popup adapter was disposed.');
+      try { await bounded(browserCDP.send('Target.detachFromTarget', { sessionId }), 1000, 'Popup detach did not settle.'); } catch { /* Context closure disposes an already gone popup. */ }
+    },
+  };
+  popupAdapters.add(adapter);
+  await command('Runtime.enable');
+  return adapter;
+}
 async function toolbar(fixture) {
   await fixture.bringToFront();
+  assert.equal(await fixture.title(), 'Authored Tracelet capture');
+  const run = promisify(execFile), options = { timeout: 5000, killSignal: 'SIGKILL', maxBuffer: 8192 };
+  const { stdout } = await run('xdotool', ['search', '--sync', '--onlyvisible', '--name', '^Authored Tracelet capture'], options);
+  const windows = stdout.trim().split(/\s+/u).filter(Boolean);
+  assert(windows.length === 1 && /^[0-9]+$/u.test(windows[0]), 'The owned authored Chrome window was not uniquely identified.');
+  await run('xdotool', ['windowfocus', '--sync', windows[0]], options);
   const previous = new Set(context.pages());
-  await promisify(execFile)('xdotool', ['key', '--clearmodifiers', 'alt+shift+r'], {
-    timeout: 5000, killSignal: 'SIGKILL', maxBuffer: 8192,
-  });
+  const before = await popupTargets();
+  assert(!before.some(target => target.url === `${extensionOrigin}/popup.html`), 'An earlier popup remained open before the OS shortcut.');
+  await run('xdotool', ['key', '--clearmodifiers', 'alt+shift+r'], options);
   report.observations.hotkeys++;
-  return newExtensionPage('popup.html', previous);
+  let targets = [];
+  try {
+    const observed = await until(async () => {
+      const page = context.pages().find(item => !item.isClosed() && !previous.has(item) && item.url() === `${extensionOrigin}/popup.html`);
+      targets = await popupTargets();
+      const matches = targets.filter(target => target.url === `${extensionOrigin}/popup.html`);
+      assert(matches.length <= 1, 'The OS shortcut exposed ambiguous extension popup targets.');
+      return page ? { page, target: matches[0] } : matches[0] ? { target: matches[0] } : null;
+    }, Boolean, 'No genuine extension popup target appeared after the focused OS shortcut.');
+    report.observations.popupControls ??= [];
+    report.observations.popupControls.push({ controlType: observed.page ? 'playwright-page' : 'cdp-target', observedTargetType: observed.target?.type ?? 'page' });
+    if (!observed.page) return cdpPopup(observed.target);
+    return {
+      readWarning: async () => await observed.page.locator('.privacy-note strong').isVisible() ? observed.page.locator('.privacy-note strong').textContent() : null,
+      readSite: () => observed.page.locator('#current-site').textContent(),
+      click: selector => observed.page.locator(selector).click(),
+      isClosed: async () => observed.page.isClosed(),
+    };
+  } catch (error) {
+    report.observations.popupTargetMetadata = targets.filter(target => target.url.startsWith(extensionOrigin + '/')).slice(0, 8)
+      .map(target => ({ type: target.type.slice(0, 40), path: new URL(target.url).pathname.slice(0, 160) }));
+    throw error;
+  }
 }
 async function download(page, button, downloads, maximum) {
   const [item] = await Promise.all([page.waitForEvent('download', { timeout: 10_000 }), page.locator(button).click()]);
@@ -229,6 +338,11 @@ async function journey() {
   const workerURL = new URL(worker.url());
   assert.equal(workerURL.protocol, 'chrome-extension:'); assert.match(workerURL.hostname, /^[a-p]{32}$/u); assert.equal(workerURL.pathname, '/worker.mjs');
   extensionOrigin = `chrome-extension://${workerURL.hostname}`;
+  browserCDP = await context.browser().newBrowserCDPSession();
+  report.observations.extensionMetadata = await worker.evaluate(async () => ({
+    commands: (await chrome.commands.getAll()).slice(0, 8).map(command => ({ name: String(command.name ?? '').slice(0, 80), shortcut: String(command.shortcut ?? '').slice(0, 80) })),
+    contexts: (await chrome.runtime.getContexts({})).slice(0, 8).map(item => ({ type: item.contextType, path: item.documentUrl ? new URL(item.documentUrl).pathname.slice(0, 160) : null })),
+  }));
   await context.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url()), headers = await request.allHeaders();
     if (headers.authorization || headers.cookie) { report.observations.credentialRequests++; return route.abort('blockedbyclient'); }
@@ -246,9 +360,9 @@ async function journey() {
   });
   await stage('invoke-start-popup-by-os-shortcut', async () => {
     const popup = await toolbar(fixture);
-    await popup.getByText('Visible content becomes part of the video.', { exact: true }).waitFor({ state: 'visible' });
-    assert.equal(await popup.locator('#current-site').textContent(), `${fixtureOrigin}/task`);
-    await popup.getByRole('button', { name: 'Start recording', exact: true }).click();
+    await until(() => popup.readWarning(), value => value === 'Visible content becomes part of the video.', 'The actual popup privacy warning was not observed.');
+    await until(() => popup.readSite(), value => value === `${fixtureOrigin}/task`, 'The actual popup did not identify the authored tab.');
+    await popup.click('#start');
     await until(() => worker.evaluate(() => chrome.action.getBadgeText({})), value => value === 'REC', 'Real recording badge was not acknowledged.');
     await until(async () => popup.isClosed(), Boolean, 'The recording popup did not close after actual capture started.');
     await fixture.locator('html > div').waitFor({ state: 'visible' });
@@ -268,7 +382,7 @@ async function journey() {
   let workspace;
   await stage('stop-through-actual-toolbar-and-open-review', async () => {
     const popup = await toolbar(fixture), previous = new Set(context.pages());
-    await popup.getByRole('button', { name: 'Stop & review', exact: true }).click();
+    await popup.click('#stop');
     workspace = await newExtensionPage('workspace.html', previous);
     await workspace.locator('#editor').waitFor({ state: 'visible' });
     assert.equal(await workspace.locator('#session-kind').textContent(), 'RECORDING & TASKS');
@@ -314,7 +428,7 @@ async function journey() {
   });
   await stage('bind-original-tab-through-actual-toolbar', async () => {
     const popup = await toolbar(fixture), previous = new Set(context.pages());
-    await popup.getByRole('button', { name: /Use this tab for tasks/u }).click();
+    await popup.click('#bind');
     workspace = await newExtensionPage('workspace.html', previous);
     await workspace.getByRole('heading', { name: title, exact: true }).waitFor({ state: 'visible' });
     await workspace.getByText('PAGE MATCHES', { exact: true }).waitFor({ state: 'visible' });
@@ -355,6 +469,7 @@ finally {
     catch (error) { if (!journeySettled) report.cleanup.journeyError = clean(error); }
   }
   report.cleanup.journeySettled = journeySettled;
+  for (const adapter of popupAdapters) await adapter.dispose();
   try {
     if (context) { await bounded(closeContext(), 12_000, 'The real browser context did not close.'); report.cleanup.contextClosed = true; }
     else report.cleanup.contextClosed = !launchAttempted;

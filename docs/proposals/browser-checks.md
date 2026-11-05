@@ -12,6 +12,11 @@ retain the edits without an ephemeral replay value. A malformed chooser file
 cannot replace current work. Confirmed deletion survives reload. Request and
 page-error guards apply; no fake extension APIs are injected into this workspace.
 
+These two journeys passed in attempt 5 and are closed. The current workflow
+executes capture-only after verifying the immutable accepted receipt SHA and
+byte/mode equality for all twelve extension inputs. Changed product inputs
+cannot borrow that old acceptance. The earlier attempts remain separate.
+
 `tests/capture.browser.mjs` attempts one additional **actual** headed Chromium
 journey under Xvfb. The operating system's xdotool presses the extension's
 declared Alt+Shift+R action shortcut; the actual popup's Start button obtains
@@ -21,6 +26,14 @@ loopback page, stop, observe/play/download the actual saved WebM and task steps,
 then explicitly bind the original tab and approve the recorded click/field.
 If the browser action cannot be operated, preserve that failure and its exact
 stage; never relabel the two workspace journeys as capture acceptance.
+
+The genuine action popup may be a Chrome `other` target, omitted from Playwright's
+page inventory. The capture-only driver may focus its own authored fixture window
+and control an exact-URL observed popup using the documented CDP Target bridge:
+DOM readiness/warning/bounds reads and trusted Input press/release clicks only.
+It never evaluates Chrome permission/start APIs, sets a Runtime userGesture flag
+or invokes private application state. The OS shortcut remains the entry point.
+Unobserved popups remain failures with bounded target/context diagnostics.
 
 The current external runner installs pinned Playwright 1.64.1/Chromium and xdotool
 only inside this disposable CI scope. Its version/integrity was read before
