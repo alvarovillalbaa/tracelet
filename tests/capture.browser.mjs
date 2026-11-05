@@ -176,8 +176,32 @@ async function configureShortcut(worker, extensionId) {
     assert.equal(await entry.count(), 1, 'The owned action shortcut row was not unique.');
     observation.actionRowObserved = true;
     const shortcut = entry.locator('cr-shortcut-input');
-    await shortcut.locator('cr-icon-button#edit').click();
     const input = shortcut.locator('cr-input#input input');
+    const edit = shortcut.locator('cr-icon-button#edit');
+    const editEnd = Math.min(end, Date.now() + 10_000);
+    const editRemaining = () => { const time = editEnd - Date.now(); assert(time > 0, 'Chrome shortcut editor readiness exceeded ten seconds.'); return time; };
+    observation.editorReadiness = [];
+    async function snapshot(label) {
+      const [inputState, editable, editRect, visible, enabled] = await bounded(Promise.all([
+        input.evaluate(element => { const box = element.getBoundingClientRect(); return { readOnly: element.readOnly, disabled: element.disabled,
+          rect: { left: box.left, top: box.top, width: box.width, height: box.height } }; }),
+        input.isEditable(),
+        edit.evaluate(element => { const box = element.getBoundingClientRect(); return { left: box.left, top: box.top, width: box.width, height: box.height }; }),
+        edit.isVisible(), edit.isEnabled(),
+      ]), Math.min(5000, editRemaining()), 'Reading Chrome shortcut editor readiness exceeded its bound.');
+      for (const rect of [inputState.rect, editRect]) for (const value of Object.values(rect)) assert(Number.isFinite(value) && Math.abs(value) <= 1_000_000, 'Chrome shortcut editor bounds were invalid.');
+      const state = { phase: label, input: { editable, ...inputState }, edit: { visible, enabled, rect: editRect } };
+      assert(observation.editorReadiness.length < 2); observation.editorReadiness.push(state);
+      return state;
+    }
+    let readiness = await snapshot('before-operation');
+    observation.usedExistingEditor = readiness.input.editable;
+    if (!readiness.input.editable) {
+      await shortcut.hover({ timeout: editRemaining() });
+      readiness = await snapshot('after-normal-hover');
+      if (readiness.input.editable) observation.usedExistingEditor = true;
+      else await edit.click({ timeout: editRemaining() });
+    }
     await until(() => input.isEditable(), Boolean, 'The Chrome shortcut textbox did not become editable.', 5000);
     await input.press('Alt+Shift+R');
     const assignedShortcut = await until(readShortcut, value => value.replaceAll(' ', '') === 'Alt+Shift+R', 'Chrome did not confirm the shortcut entered through its normal UI.', 5000);
