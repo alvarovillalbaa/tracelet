@@ -12,6 +12,8 @@ jobs:
       TRACELET_PREPARATION_SHA: PREPARATION_SHA_REPLACED_BY_ROOT
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0

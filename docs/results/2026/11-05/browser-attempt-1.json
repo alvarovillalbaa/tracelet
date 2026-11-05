@@ -1,0 +1,45 @@
+{
+  "kind": "tracelet-browser-attempt",
+  "attempt": 1,
+  "runId": 41979276665,
+  "jobId": 127085350021,
+  "runURL": "https://github.com/alvarovillalbaa/tracelet/actions/runs/41979276665",
+  "preparation": "231d838aa4c28ded0bef0b148cc408af2f0e51e2",
+  "activation": "582b3d617b4ae065ceeb776bc5605df7b45159eb",
+  "conclusion": "failure-before-any-command-or-browser",
+  "controller": {
+    "kind": "tracelet-browser-ci",
+    "startedAtUTC": "2026-11-05T06:16:21Z",
+    "commands": [],
+    "guards": [
+      {
+        "stage": "after-working-bytes",
+        "matched": true
+      },
+      {
+        "stage": "after-git-head-index-status-ignored",
+        "matched": true
+      }
+    ],
+    "cleanup": {
+      "commandGroupsGone": true,
+      "generatedOutputRemoved": false,
+      "scratchRemoved": true
+    },
+    "errors": [
+      "Command '['git', 'rev-parse', 'HEAD^']' returned non-zero exit status 128."
+    ],
+    "head": "582b3d617b4ae065ceeb776bc5605df7b45159eb",
+    "tree": "b31884f60068f0117d7ef4181d358243c6623ff3",
+    "preparation": "231d838aa4c28ded0bef0b148cc408af2f0e51e2",
+    "finishedAtUTC": "2026-11-05T06:16:21Z",
+    "interrupted": false,
+    "passed": false
+  },
+  "observedFailure": "Checkout depth 1 omitted HEAD^; source ancestry preflight failed with git exit 128. Node 24.21.0 setup succeeded. No application/static/tooling/browser command executed.",
+  "repair": "Fetch depth 2 supplies the immediate parent; no guard or application assertion is weakened.",
+  "warnings": [
+    "Experimental VM warning belongs only to earlier local Node source.",
+    "GitHub forces Node-20 actions checkout@v4/setup-node@v4 to Node24; setup-node also reported punycode deprecation."
+  ]
+}
