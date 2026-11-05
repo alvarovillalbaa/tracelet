@@ -1,0 +1,787 @@
+{
+  "kind": "tracelet-capture-acceptance",
+  "acceptedAtUTC": "2026-11-05T07:20:51Z",
+  "runId": 41986491584,
+  "jobId": 127108337016,
+  "runURL": "https://github.com/alvarovillalbaa/tracelet/actions/runs/41986491584",
+  "preparation": "50d31bc739e1b6bde6b68d18979accd4b1943839",
+  "activation": "c7d0f4328417bc7daf0a9a80a5ea10990223738c",
+  "controller": {
+    "kind": "tracelet-browser-ci",
+    "startedAtUTC": "2026-11-05T07:20:15Z",
+    "commands": [
+      {
+        "label": "static",
+        "args": [
+          "node",
+          "scripts/check.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:15Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 2590,
+          "sha256": "7647158863c114ec7148a530a60f512a21c327125112d3d59516bf18dbfef0e1",
+          "zlibBase64": "eJyllj2P2zAMhvf+CkGzz+7XlE5dOnVqx6IoFIlOdJElgaLzgcP999K59HCJFX91MmTpIcWXL2w+yZ31Rq4kodLggB4SKbL6QW9B75IsZFQpAZ8gbKGQj2qvkkYb6Zt1kOTqwyd+mYL/t/xYyC017rL8XEgXtHJfOQb9gBoQvD6fe19I28SAxItfT7Lm83wLOBL4ZIOvnF1XZl02j90dSOEGiPfL6hBwV7twOO88Fxky1DXfEMD34TdBs2gMsY15bDxvdwJwftIhblrWFLl3yxIPoPdyv7Q/VWeH3KI+GFh1jkGqEqHVNA+tZ6aKirbzCL21zvyJGNiHM5O16HIAS7hTm56Kl3oqTtXYBNlcw+hc4p4YQ8yCmjSeIoW3FEFiZo3hkPpOHrbEOHqtw5TzWcnHwVv5xokb8caBJdJtiWKf0CpSi1D+h+hTQuTEn8YNNGFKgHwzppDZpkwB7zVnCru8SXe/RzMqJpspGUEHNNZvym69xCATIgz2eQLfbSwC900fe/1jLS14PED+voNcWVbXY831j/U3j1gYQv3dNrYbhuTPkyd1LEQKLWoQ+Do1CeWNMKCdQjCCjaHW1lmyvBO8O30RPggOZVpNouGHA/EyYhXi4p5CNGCsEhdTFRw8OnUSAYVCNuIeBBxBs5+CL+Xzu7/kGpFX"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:16Z"
+      },
+      {
+        "label": "package",
+        "args": [
+          "node",
+          "scripts/package.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:16Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 135,
+          "sha256": "1145859953d6abc32e0fd3662c3d12ae8b4b12486eb8939f7774dbec26048831",
+          "zlibBase64": "eJwVzcEOwiAMgOG7j9HzJKXQAnsbYG1cMo1xu0zju4v3P9//AVs3fdS7wgzHq3bd9Lii8w7de33CBO08dIc5e0k0wX6rxDLaVnLlWBZPzBiX1IOlUJJSjonUFBtSE6whWFduXUxIPFeJ2qWTDfl/HrKn7+UHegQmPA=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:16Z"
+      },
+      {
+        "label": "browser-tooling",
+        "args": [
+          "npm",
+          "install",
+          "--prefix",
+          "/tmp/tl-29qvb4zn/tooling",
+          "--no-save",
+          "--ignore-scripts",
+          "--package-lock=false",
+          "--no-audit",
+          "--no-fund",
+          "playwright@1.64.1"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:16Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 24,
+          "sha256": "65c731cd02e19c79f6f5a3e84a4dd64a49acd6c47d2ee551d7cc9da191e8c96c",
+          "zlibBase64": "eJzjSkxJSU1RMFIoSEzOTkxPLVbIzFMwKuYCAF4uB3Q="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:17Z"
+      },
+      {
+        "label": "runtime-identity",
+        "args": [
+          "node",
+          "-e",
+          "const fs=require(\"node:fs\"); const p=JSON.parse(fs.readFileSync(\"/tmp/tl-29qvb4zn/tooling/node_modules/playwright/package.json\",\"utf8\")); if(p.version!==\"1.64.1\")throw Error(\"Unexpected browser tooling version\"); console.log(JSON.stringify({node:process.version,playwright:p.version}));"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:17Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 42,
+          "sha256": "ee2bf8fe8fa6504f0236a977e743876668ba2886aaad72363e334105afcd5519",
+          "zlibBase64": "eJyrVsrLT0lVslIqMzLRMzLUM1DSUSrISawsL8pMzygBihvqmZnoGSrVcgEABIQLlw=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:18Z"
+      },
+      {
+        "label": "chromium-install",
+        "args": [
+          "node",
+          "/tmp/tl-29qvb4zn/tooling/node_modules/playwright/cli.js",
+          "install",
+          "--with-deps",
+          "chromium"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:18Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 15732,
+          "sha256": "ef44fe04fad0fb159fef7da6ee91313e1f33a4b976c1b728f1b461835b640102",
+          "zlibBase64": "eJzlWt2u27gRvjeQd+BNsDYSUaIkW7Z71bRNdy8SBJss9uKgOJAt2tZGlrQkdX6CYB+j1322PkmH1L9sSbbsnE3SwAH0w/nmm+GQMxydn0Iu3CDwwy3yaExDj4Zrn3KM8ej9vS/WO/lGRIhFkUAJp0ze+KnQgcQ/qVgStPEDutSpWOtuLOR/be8zFjGOxYNAb9R14HOBbohto1f/Gv3oi6WJdkLES113PyWMYpeB5juKk1USigSvo72eXqIwWgUU/RT+TAPqcqp0zpQwB+nYXX90t8Bm769ZxKONqMjqpo0NW49Z5DVh0I01MwxJRuJZZ5HRkthzBeVVNGLO0McMzT4PbQUmxBETrXjT8/A4XSfMF49tcM5A5+l71w+Ry/YzG73LJNHNbGYVyPPLkPdeDdmxSIG8GDRBx3GJbSwKYGJcgPyBuSEPXOFHoUZDCClSMobLQcBJCKMYzNkBbcdwSvTzlk8REy0eIdMK9JmLoQ7ddIlpleFBzlwYBXK7T0xzWsIPXCcl/AF5u+KW2UB0Rrlg/lpQ78iUmpWAcS5XcBCQC7vEnw+d1yQQLQ4iJk4VvIbdfwcEiIFN9OYVJAxEOBovZpbcd3Q+Gf1MXU+mlmxnQDIhqBzS+uJV4gdeLU89IsEorQpBWhIUtG0itle05MvAX7k8SkLPFOBunyM3YDAepHcUhfQe/IWkPTAcjQk2MSEaSW03sDVpAnAqZA7cu2ECOfAxT4bUSweKj9qK+d6WmtjQjBM0mngqh5KVtI9M2lB61ZLL9JFTFfHYv8y0KkC3srXrs8jsnzIyBzyrqiWT7IFPYn5KTEBUY0eDyEiDwsHEntQBuvV4q4RrRLNOMMTGxNDsVA9cT+ryPWrYvtdX0hRiTsv4Jn+o7IvNSYnRrWa72pNeNVNYRnPNyLWkOjKvKYAeHfD/9CCbGzB0luqywIGTQ4xudSGPWb+epY0t8ByuhXMq2gfPe+feXFp4MT/Yd5RoN3rshttIU8u3P8BgPZIXHq8vySpCt64H2Bpn/aYQPJcLpoixSUW4R8F61RtcMANFAGdhq8T6kKN9HHFf0H4FSwOWyTRzkjU5kO/R5Ll7yFwnqAFL8Kw+F4Vwjw76IE6aCAvbmYLcVUqyB33jP9D+mCXLGZZLz6wZkMn2aPi4An/uo/CEmJ01U0hFuEcL1Cce698UwU+wYTXsyGQ7NDzcbVb92KacZWLmEUvwAhRsolBwLYxEpK2jIGIa3Ue/+f1bnWE7zV014ysR11G48bf9uzMsIOlTXF9EVYRuv26g7BKPMe2PQEwsbL7wNnxbbge5ugKkQ1nqJxhNmarn+kMSVMLStSZHZDv0fACsTRQE0b0sI13P86WEG+RlKEf3fhCgFS2FliOEHlIdUItGsv7k+YNE+AGHqlSGqaxVvQJHSqVj/NiVF9reD9e7KHsogvutFkR7t8Ho7T9+7aGSykunKlQhNg0920js/HVTjxYVA+HcIy8KrPvfH7VPNNxRPzdr/chANYC02c3XbuDCaaF0TeoJAyXxlrngiJdoISet6v2XyFAdJlgCd3CmCz1kWnDoEIUMHr2l4EIYs4UZlOtJnimiDcrOLByP/roRsjW1g/CI4my+XyJngaf50HJKPZ9/RBy8SQtPJlxqGdi+kmLnnb+bJ9ijEyUbbIZhGZZm5lsHnOCmpDxAn3cyr571jwSLVGcaJiGmYb/gd6FtOqAZ3UxnNhnYyjpuZj30pFqZbx1saWAfqTQ1zju/H1eWxXSmBrY9qHJInk3gRL9YlO4870R/XF9lzaj5wwtsT7U5unFsx2y03IZM3MHCywyDPDzNE4OcNGfe6MJdoEwt4ewRWTrYeTFLCyN0s7CxPbAp1/Rfc4upGPYi3KvYn9tD+3RHrMq3qooiiEAMRllGvYmRbziAYHA0diwY9EY1Md7TgK6F6lYweudHCYd9LQm5elxu+kfXN342GudtC88V7ko2ZjHG6Nnxx9PnLS+I0fqmVcZslTFbZaxWGatVxm6VsVtlpq0y01aZWavMrFXGaZVxWmXmrTLzVplFq8yiY07bJ4hMFzNDZSmukqXnM4i2iPlwv04Yo6Go1TaTZ6N3jMYuy77kJKEMS4mlG9qxyLxtZJ1bwMEeXUmRZ6NflLjEOpq1xg3hSSp13kqpJibcTp9oh8NvD3NYN/9aEhwfSg8yoJbjOiwwtSPjb8lzy80yYjf3eiodF3l0EOcsVXawtbTaSMWzkVK7+ebZeHyQigcxLpNtB2lbaw6+zbNyN9lKKh/nEmfSbGbrDppTrTk4dW8tsbcRPqgKxs2SYBhxlfk7SM+06kBFuFIe3Kp828E3LSzGtZpiGNG8aujg6miNsaV/VX3R49uiLhlXi5JhbPPSo4PtXGuMLdiqIqWHbFHbjCuFTcFVKKZJfEqcN8aevFk25Ho3qmL8GaHc0HFaIkq/q2puAOfF0JUfsvgSjn8SSU840/nOZVRXiDqcJEPZodDr0PJ2i6UHYM5iFt35Hj0UFixR7Y30VvvNjd2QcppXf8qBra8msth0E9msiDx6xNgTdtKmSztXW3NwT7g3h3cF3DsWrSlXHhbM326h5gcjmGzDaN5K9Yhkm97OmpSp0Fs4/q+KD35Z/fOXTEaXnsm+kMuGkOwV/CD9/UOHurK7dawBlmr9e3QfBlFadP1tx6I9VaIfKFf2kqnsd84NZw6nnnEcuI/3oGEn0FqO9ZM9uiOmDYtnA7fF3z6svRCXY2HV3unKMq6vN0KvYuqBHyYPM1tXeFTLbvEnPx59Rlf+JwGN57I1QhbqgOO/Gn3+77//c/R3RaXkZKVfigyQMC8mcW1yQMr6YqSuRRZI2k9O8lLyQHr61ZAeagwYMfvqjTjXODDK+WaNOtVYMHL+3RnZZzwYvfi/Mbrt91m1cepOuKSq8LLqJP0Uoot9rItAMxe/363sT6G+YtE9h2pHz+U0KVaraV6/3sd0W1Oy2ahHd8QgVn/h4q1Uu1XPqejl+7yoSQF1iZddp3XMl65iTPmXZk9bw/Sq/FJUygpmMIVrUyvrl6tTuhbVsnp5MoqXUi9rlz+d8lBTysrlqzXhXNPKuuWbM+lUU8uq5bsxsc/0smb57k1u+5UVS+6C3orh1KIkKwWk0LE2y4/U9QLKOXq/o/J7bF9NpO0yAY0rges2XurgT9aHMY0n78L0qfxSVCo9mKEUrk2t0oG5NqVrUa30X56K4qXUK92XP5vyUFMqvZev1YRzTat0Xr41k041tdJ3+V5M7DO90nX53k1u+1V6LpkLrltgnNuDuc1hbtNSQrVk/gePv/Qb"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:38Z"
+      },
+      {
+        "label": "native-input-tooling",
+        "args": [
+          "sudo",
+          "apt-get",
+          "install",
+          "-y",
+          "xdotool"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:38Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 1928,
+          "sha256": "fe0b24b15efe74e12a042b589b053aeafa116fd2a28ea173ac086a197b654f63",
+          "zlibBase64": "eJyllVtv0zAUx98j9Tucl2mdtDqJk3ZteWIS8MSEBoiHCU1OfNpaS+3Il1349Nhu2gGatwEPreIc//w/J+fiS2RcyDX0rL1ha4ROGGsIIdm5E120cOxRcpTtA1iNGGyXA2QsswhCrpTeMiuUDMYvG4SV6jp1F7YwzkWwsG4vYeBOdB00AfQHdB3yZQZeuLnnqvoDv3j37XUc+D+rVJcV4Pq1Zhz5KVCQeNc9PAKnUIBVoHGrbhGY5EArkMoeGJJdIPKwZ40WZjWZw805qBUw3W7ELRqSvV1Z1GA3woDqUce4vVRx2PkYMRfmBoz3Hw++OxNEPqBdlrASHS5ztG3Oeht+k63QWmlD7L2Fj/E55AOuyrqG8+8Ro7Cxtl/mOfvhNJLBL+IaJ60jrdrmu0cfVtNh7qS3auOD3fJZffhau1W5rAgtylkxL6aknEybkPMSrigl1EezE6z+S3BIywuCNSWzKPjef42NT8D+ywsJhYHxYh5WuTnJPmOHrY0Vq/FWKGd8fp008bUHH+s4BrqMumSUjfc1y5llDfP++VqF0dOvp0cJQ1kkLUmGJhmaZKokUyWZOsnUSWaaZKZJZpZkZknmLMmcJZl5kpknmUWSWTyT03SCyhmlZ7FPTZwWXGhfZkoLv26d1ijtr+OFnIyyTxp7psNRfog4GeoxnJUPBXldHlXsqSa43lUqxyZsH2VfIxrO+a2UYfx0D53sqNe2x9CWJO3vsOMf/N23/Eue2uin6/8ywAP2Op1PWrVoTAxQi/XazyZ/v2jYMjnhDYwpKSkpJnWE6ABd+CuhOVyAQ0m8GZicOasmrufx8jPx/ji22uHxM3I+xnbS+HHmBavFpNjNzDlZDIo/AVsoXkY="
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:40Z"
+      },
+      {
+        "label": "actual-tab-capture",
+        "args": [
+          "xvfb-run",
+          "-a",
+          "node",
+          "tests/capture.browser.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T07:20:40Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 3479,
+          "sha256": "f219d543daae476da3cb4e19a9f9b7fd18317375c08fdcb0169db221cbca6cc0",
+          "zlibBase64": "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"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T07:20:49Z"
+      }
+    ],
+    "guards": [
+      {
+        "stage": "before",
+        "files": [
+          {
+            "path": ".github/workflows/tracelet-acceptance.yml",
+            "mode": 420,
+            "bytes": 561,
+            "sha256": "352c1344688cd3a0ba23ba11138f9d37b07ce5a235c2a9ed96b3da4453874e23"
+          },
+          {
+            "path": ".gitignore",
+            "mode": 420,
+            "bytes": 95,
+            "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+          },
+          {
+            "path": "AGENTS.md",
+            "mode": 420,
+            "bytes": 2488,
+            "sha256": "804be44f1f3de6e357f3d2bef5517b615a74659d8da041b92d294b70679ddd0d"
+          },
+          {
+            "path": "LICENSE",
+            "mode": 420,
+            "bytes": 1072,
+            "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+          },
+          {
+            "path": "README.md",
+            "mode": 420,
+            "bytes": 3789,
+            "sha256": "af664e057ade74b9d96e2aa0d4452214b842e447df6edfa8ea98aa07a28e11d0"
+          },
+          {
+            "path": "docs/architecture.md",
+            "mode": 420,
+            "bytes": 3503,
+            "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+          },
+          {
+            "path": "docs/proposals/browser-checks.md",
+            "mode": 420,
+            "bytes": 4153,
+            "sha256": "6dfa0fced999f2ee356b64177bfc106dd843d7e748a9b7afd1573b6b4d776f68"
+          },
+          {
+            "path": "docs/proposals/browser-checks.yml.example",
+            "mode": 420,
+            "bytes": 553,
+            "sha256": "60ce7b2ddd1e59936346358a7a824f3e253f57bed6c3106581b71c86cb6dd07f"
+          },
+          {
+            "path": "docs/proposals/focused-checks.md",
+            "mode": 420,
+            "bytes": 3255,
+            "sha256": "a7525a3830b66dc4d43b8c5afd1215e23e3dbcab7ae8f284ee5471a02606fe41"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.json",
+            "mode": 420,
+            "bytes": 1703,
+            "sha256": "0d9b35846fcedbab73d870905421a41dc512213d1057e1c3bdc654724df7e4db"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.md",
+            "mode": 420,
+            "bytes": 1132,
+            "sha256": "2db2ed35b638e37c5adce6dc0e4bd179e8580de5c6e96e671faecce8cb8f3aad"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.json",
+            "mode": 420,
+            "bytes": 22040,
+            "sha256": "d887c3ef9f03efb6e7d5833d4b6598484e13f2fc21f8deb69a68ace314112e03"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.md",
+            "mode": 420,
+            "bytes": 1553,
+            "sha256": "68bd284fc448f5d6e7886097fa666852d921920df2675f20e87761d7fc24fdf5"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-3.json",
+            "mode": 420,
+            "bytes": 35245,
+            "sha256": "5edfaad925943ea8f09ae0f0f556da2f064a7c11d9925f98af46897cf5cde3ba"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-3.md",
+            "mode": 420,
+            "bytes": 1906,
+            "sha256": "ce5f560164d9d4532481a478d2e067da75b9c19728a152b8980f37f75bb23895"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-4.json",
+            "mode": 420,
+            "bytes": 26944,
+            "sha256": "5f88c845af191be2acc0b6fd65a9f89a2d96ef64a123cdf2596b5da52dd7ab3b"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-4.md",
+            "mode": 420,
+            "bytes": 1965,
+            "sha256": "a13ae8248509d16ec39d7c8e1482ec26a8ec23e54073d9de720c6a4b857bd167"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-5.json",
+            "mode": 420,
+            "bytes": 34284,
+            "sha256": "9ed76ebbf701c709796e840748b812cbb8a3d01f8837722f3e9bed81a35b6228"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-5.md",
+            "mode": 420,
+            "bytes": 1821,
+            "sha256": "aebfbf0a5219fc31e55fa5940ae670f875ef42ff386d8f9ff481522065a3c02c"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-6.json",
+            "mode": 420,
+            "bytes": 26851,
+            "sha256": "1ad4be60ddcb4d6cfddce6729ee217047d51fa4c202fbba47cbfa9e671f53533"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-6.md",
+            "mode": 420,
+            "bytes": 1446,
+            "sha256": "92f915caecaf9b22abd79a110b324bbed2b52546b46c18d2c850596fed10c1b7"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-7.json",
+            "mode": 420,
+            "bytes": 28125,
+            "sha256": "20826fef6cd657f70027f2416cabb12eca8d8074a8e1d7f9538d01da68c6cc7c"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-7.md",
+            "mode": 420,
+            "bytes": 1589,
+            "sha256": "c5d66ef5231ebc1fb198e9423548d781102299fddf0fd678f24a4190e502c052"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-8.json",
+            "mode": 420,
+            "bytes": 29029,
+            "sha256": "5904064f705c7a86afd799c26b6dbe2fabb892eccf59829f98a3377a1051fa6d"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-8.md",
+            "mode": 420,
+            "bytes": 1255,
+            "sha256": "9d871651b56708e868f22e5eb29f83532ec77b795dc9f86e8930a828aed9c08a"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.json",
+            "mode": 420,
+            "bytes": 13997,
+            "sha256": "022e723a0ab1acb1c29dfad166973ebfdf6abf67ef28cb01b7b2b90f738b81fd"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.md",
+            "mode": 420,
+            "bytes": 2182,
+            "sha256": "1f52a2816cdb960f0a2ff6c3430c540e7e13dd049e320876390ea46596a9b652"
+          },
+          {
+            "path": "docs/spec.md",
+            "mode": 420,
+            "bytes": 4157,
+            "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+          },
+          {
+            "path": "extension/content.js",
+            "mode": 420,
+            "bytes": 11671,
+            "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+          },
+          {
+            "path": "extension/lib/db.mjs",
+            "mode": 420,
+            "bytes": 7012,
+            "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+          },
+          {
+            "path": "extension/lib/workflow.mjs",
+            "mode": 420,
+            "bytes": 6734,
+            "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+          },
+          {
+            "path": "extension/manifest.json",
+            "mode": 420,
+            "bytes": 805,
+            "sha256": "8fa9e7bfc9002ac42ced2596d63257c0ce915ff5a7163062c86669dbb0783033"
+          },
+          {
+            "path": "extension/offscreen.html",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+          },
+          {
+            "path": "extension/offscreen.mjs",
+            "mode": 420,
+            "bytes": 3967,
+            "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+          },
+          {
+            "path": "extension/popup.html",
+            "mode": 420,
+            "bytes": 2127,
+            "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+          },
+          {
+            "path": "extension/popup.mjs",
+            "mode": 420,
+            "bytes": 2255,
+            "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+          },
+          {
+            "path": "extension/ui.css",
+            "mode": 420,
+            "bytes": 11316,
+            "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+          },
+          {
+            "path": "extension/worker.mjs",
+            "mode": 420,
+            "bytes": 11567,
+            "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+          },
+          {
+            "path": "extension/workspace.html",
+            "mode": 420,
+            "bytes": 5127,
+            "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+          },
+          {
+            "path": "extension/workspace.mjs",
+            "mode": 420,
+            "bytes": 17492,
+            "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+          },
+          {
+            "path": "package.json",
+            "mode": 420,
+            "bytes": 394,
+            "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+          },
+          {
+            "path": "scripts/browser-ci.py",
+            "mode": 420,
+            "bytes": 11485,
+            "sha256": "9f9e8be95cb154f8a985bdf5e9e6cda7f9a8cd4e944b69584d119aa14cf8e65b"
+          },
+          {
+            "path": "scripts/check.mjs",
+            "mode": 420,
+            "bytes": 7975,
+            "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+          },
+          {
+            "path": "scripts/local-checks.py",
+            "mode": 420,
+            "bytes": 4842,
+            "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+          },
+          {
+            "path": "scripts/package.mjs",
+            "mode": 420,
+            "bytes": 4595,
+            "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+          },
+          {
+            "path": "site/icon.svg",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+          },
+          {
+            "path": "site/index.html",
+            "mode": 420,
+            "bytes": 3609,
+            "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+          },
+          {
+            "path": "site/style.css",
+            "mode": 420,
+            "bytes": 4244,
+            "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+          },
+          {
+            "path": "tests/browser.mjs",
+            "mode": 420,
+            "bytes": 23734,
+            "sha256": "b03753aacb7c8dce647b9da933ac6e86d3ef6d889de6f064424b889eec9892a2"
+          },
+          {
+            "path": "tests/capture.browser.mjs",
+            "mode": 420,
+            "bytes": 41489,
+            "sha256": "a7e628e7848c7fc1b5a0675210f59517fa44a0352526747bd90cbac1add426c4"
+          },
+          {
+            "path": "tests/recording.test.mjs",
+            "mode": 420,
+            "bytes": 10828,
+            "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+          },
+          {
+            "path": "tests/workflow.test.mjs",
+            "mode": 420,
+            "bytes": 11362,
+            "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+          },
+          {
+            "path": "vercel.json",
+            "mode": 420,
+            "bytes": 597,
+            "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+          }
+        ],
+        "matched": true
+      },
+      {
+        "stage": "before-browser",
+        "matched": true
+      },
+      {
+        "stage": "after-working-bytes",
+        "matched": true
+      },
+      {
+        "stage": "after-git-head-index-status-ignored",
+        "matched": true
+      }
+    ],
+    "cleanup": {
+      "commandGroupsGone": true,
+      "generatedOutputRemoved": true,
+      "scratchRemoved": true
+    },
+    "errors": [],
+    "head": "c7d0f4328417bc7daf0a9a80a5ea10990223738c",
+    "tree": "978acd05fc775dce6a31baaa8825a559be2ca741",
+    "preparation": "50d31bc739e1b6bde6b68d18979accd4b1943839",
+    "runtime": {
+      "node": "v24.21.0",
+      "playwright": "1.64.1"
+    },
+    "scope": "capture-only",
+    "workspacePrior": {
+      "runId": 41981733018,
+      "preparation": "45d86d7c7d18a019646d594ef6d284ed96abbf96",
+      "receiptSHA256": "9ed76ebbf701c709796e840748b812cbb8a3d01f8837722f3e9bed81a35b6228",
+      "exactExtensionInputs": 12,
+      "notRerun": true
+    },
+    "capture": {
+      "case": "C01",
+      "status": "passed",
+      "stage": "complete",
+      "observations": {
+        "pageErrorCount": 0,
+        "unexpectedRequests": 0,
+        "credentialRequests": 0,
+        "fixtureRequests": 1,
+        "hotkeys": 3,
+        "pageErrors": [],
+        "temporaryRootBytes": 40,
+        "processBaselinePIDs": 10,
+        "browserVersion": "156.0.8078.4",
+        "extensionMetadata": {
+          "commands": [
+            {
+              "name": "_execute_action",
+              "shortcut": ""
+            }
+          ],
+          "contexts": [
+            {
+              "type": "BACKGROUND",
+              "path": null
+            }
+          ]
+        },
+        "shortcutConfiguration": {
+          "command": "_execute_action",
+          "defaultShortcut": "",
+          "assignedShortcut": "Alt+Shift+R",
+          "configuredVia": "Chrome shortcuts UI",
+          "actionCardObserved": true,
+          "actionRowObserved": true,
+          "editorReadiness": [
+            {
+              "phase": "before-operation",
+              "input": {
+                "editable": false,
+                "readOnly": true,
+                "disabled": false,
+                "rect": {
+                  "left": 632,
+                  "top": 174.015625,
+                  "width": 100,
+                  "height": 16
+                }
+              },
+              "edit": {
+                "visible": true,
+                "enabled": true,
+                "rect": {
+                  "left": 750,
+                  "top": 166.015625,
+                  "width": 32,
+                  "height": 32
+                }
+              }
+            },
+            {
+              "phase": "after-normal-hover",
+              "input": {
+                "editable": false,
+                "readOnly": true,
+                "disabled": false,
+                "rect": {
+                  "left": 632,
+                  "top": 174.015625,
+                  "width": 100,
+                  "height": 16
+                }
+              },
+              "edit": {
+                "visible": true,
+                "enabled": true,
+                "rect": {
+                  "left": 750,
+                  "top": 166.015625,
+                  "width": 32,
+                  "height": 32
+                }
+              }
+            }
+          ],
+          "usedExistingEditor": false
+        },
+        "popupControls": [
+          {
+            "controlType": "cdp-target",
+            "observedTargetType": "page"
+          },
+          {
+            "controlType": "cdp-target",
+            "observedTargetType": "page"
+          },
+          {
+            "controlType": "cdp-target",
+            "observedTargetType": "page"
+          }
+        ],
+        "popupReadiness": [
+          {
+            "selector": "#start",
+            "found": true,
+            "disabled": false,
+            "hidden": false,
+            "rect": {
+              "left": 23,
+              "top": 548.75,
+              "width": 262,
+              "height": 42
+            },
+            "viewport": {
+              "width": 308,
+              "height": 600
+            },
+            "hit": true,
+            "statusText": "",
+            "scrollEvents": 0
+          },
+          {
+            "selector": "#stop",
+            "found": true,
+            "disabled": false,
+            "hidden": false,
+            "rect": {
+              "left": 23,
+              "top": 424.296875,
+              "width": 262,
+              "height": 42
+            },
+            "viewport": {
+              "width": 308,
+              "height": 600
+            },
+            "hit": true,
+            "statusText": "",
+            "scrollEvents": 1
+          },
+          {
+            "selector": "#bind",
+            "found": true,
+            "disabled": false,
+            "hidden": false,
+            "rect": {
+              "left": 23,
+              "top": 473.75,
+              "width": 262,
+              "height": 42
+            },
+            "viewport": {
+              "width": 308,
+              "height": 600
+            },
+            "hit": true,
+            "statusText": "",
+            "scrollEvents": 1
+          }
+        ],
+        "toolbarCaptureStarted": true,
+        "inPageIndicatorVisible": true,
+        "capturedSteps": 2,
+        "video": {
+          "width": 1280,
+          "height": 1024,
+          "duration": 0.175,
+          "indefiniteDuration": false,
+          "playedTime": 0.016
+        },
+        "videoDownload": {
+          "bytes": 7118,
+          "sha256": "57a6704d045152dd3e7f7d93d326dd9c1dfc1c7e9835cbb219ff6efd7543fdff",
+          "webmHeader": "1a45dfa3"
+        },
+        "workflowDownload": {
+          "bytes": 867,
+          "sha256": "510931f64e15ac6275eb98fd706e89e6a43228911b2610cd95762925cc6bffe2",
+          "valuesAbsent": true
+        },
+        "savedEditsSurvivedReload": true,
+        "bindingObserved": true,
+        "clickReplayObserved": true,
+        "fieldReplayObserved": true,
+        "replayValueAbsentFromExport": true
+      },
+      "cleanup": {
+        "journeySettled": true,
+        "contextClosed": true,
+        "serverClosed": true,
+        "processOwnership": {
+          "baselinePIDs": 10,
+          "newPIDsScanned": 2,
+          "observedPIDs": 0,
+          "remainingPIDs": 0,
+          "uncertain": false,
+          "passed": true
+        },
+        "ownedDirectoryRemoved": true
+      },
+      "proofLimits": [
+        "One headed Chromium/Xvfb installed-extension journey with OS shortcut invocation and real tabCapture.",
+        "Authored loopback tab only; no real user browser, account, microphone, sound or external site.",
+        "DOM replay dispatch and fixture outcomes do not establish trusted native input or third-party transaction safety.",
+        "Context-close and bounded same-UID Linux process checks inspect new/reused identities for owned argv/TMPDIR/XDG markers; unchanged prelaunch identities are excluded, not a global descendant inventory.",
+        "Linux Chromium does not establish macOS privacy prompts, device behavior, Chrome Web Store distribution or full product acceptance."
+      ],
+      "interrupted": false
+    },
+    "finishedAtUTC": "2026-11-05T07:20:49Z",
+    "interrupted": false,
+    "passed": true
+  },
+  "sourceArchive": {
+    "version": "0.1.0",
+    "bytes": 81672,
+    "sha256": "b98a549d125504d7c3f7397e28472efe0b02b60a33fce5bc6f62615a64ec6c2f",
+    "members": 12
+  },
+  "separateAcceptedScopes": {
+    "node": {
+      "cases": 31,
+      "receipt": "local-checks.json",
+      "runtime": "Node 26.8.2",
+      "notRerun": true
+    },
+    "workspace": {
+      "cases": [
+        "B01",
+        "B02"
+      ],
+      "runId": 41981733018,
+      "receipt": "browser-attempt-5.json",
+      "notRerun": true,
+      "exactExtensionInputs": 12
+    }
+  },
+  "limitations": [
+    "One authored Linux Chromium/Xvfb document and very short video; no macOS/real-device/long-duration/quota/cross-document or universal website acceptance.",
+    "Source unpacked installation and archive byte equality are distinct from a human installing the downloaded archive or Chrome Web Store distribution.",
+    "All eight previous attempts remain immutable; later success does not establish precise earlier SIGTRAP/editor causes or retroactive cleanup of retained failed-run residue.",
+    "No account, backend, model/provider call, paid plan or new enrollment."
+  ]
+}

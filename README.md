@@ -9,8 +9,11 @@ Alvaro's [recorder-to-task brief and implementation contract](docs/spec.md).
 
 [31 focused Node checks passed](docs/results/2026/11-05/local-checks.md), followed
 by [two installed-extension workspace journeys](docs/results/2026/11-05/browser-attempt-5.md)
-covering actual import/edit/save/reload/export/deletion. Capture/replay acceptance
-remains separate; it is not implied by the protocol adapters or workspace checks.
+covering actual import/edit/save/reload/export/deletion. The separate
+[real capture/replay journey passed](docs/results/2026/11-05/capture-checks.md):
+record, stop, play/download, edit/reload and individually approve click/field
+replay on an authored page. This Linux/Chromium fixture proof is separate from
+macOS/device, long-duration/quota and Chrome Web Store acceptance.
 
 [Download and installation](https://tracelet-three.vercel.app) ·
 [Source](https://github.com/alvarovillalbaa/tracelet)

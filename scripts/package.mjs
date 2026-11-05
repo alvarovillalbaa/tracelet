@@ -20,6 +20,9 @@ async function walk(path) {
   }
 }
 await walk(extension);
+const licenseInfo = await lstat(resolve(root, 'LICENSE'));
+if (!licenseInfo.isFile() || licenseInfo.isSymbolicLink()) throw new Error('Archive license must be an ordinary source file.');
+members.push({ name: 'tracelet/LICENSE', bytes: await readFile(resolve(root, 'LICENSE')) });
 if (members.length > 100 || members.reduce((sum, x) => sum + x.bytes.length, 0) > 2_000_000) throw new Error('Unexpected archive size.');
 const table = Array.from({ length: 256 }, (_, index) => { let crc = index; for (let bit = 0; bit < 8; bit++) crc = crc & 1 ? (crc >>> 1) ^ 0xedb88320 : crc >>> 1; return crc >>> 0; });
 const crc32 = bytes => { let crc = 0xffffffff; for (const byte of bytes) crc = (crc >>> 8) ^ table[(crc ^ byte) & 255]; return (crc ^ 0xffffffff) >>> 0; };

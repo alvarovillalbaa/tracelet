@@ -28,6 +28,10 @@ personal Notion portfolio, separate from Framelet's native video editor.
   workspace journeys closed while their twelve extension inputs are exact.
   The current QA template is capture-only and verifies that pinned receipt/input
   identity before executing C01. Prior failures remain immutable.
+- C01 subsequently passed once at `50d31bc739e1b6bde6b68d18979accd4b1943839`;
+  see `docs/results/2026/11-05/capture-checks.md`. Keep all three accepted scopes
+  closed. The retained workflow template is inactive; no app/provider/device or
+  store guarantee is implied. Preserve the eight failed attempts and proof limits.
 - Source and personal GitHub publication and free static Vercel hosting are
   authorized. No store enrollment/submission or paid resource is authorized.
 - No local installs/builds/browser environments: Storage Guard on 5 November
