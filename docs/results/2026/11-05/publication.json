@@ -1,0 +1,85 @@
+{
+  "kind": "tracelet-publication-receipt",
+  "windowUTC": [
+    "2026-11-05T07:31:10Z",
+    "2026-11-05T07:31:56Z"
+  ],
+  "repository": "alvarovillalbaa/tracelet",
+  "receiptBearingCommit": "8026196dfb446019bce92e469faaff738493c705",
+  "tree": "aaafb44bf6eecb0b40a9f4d892e3963a8eb67e9e",
+  "trackedLeaves": 55,
+  "trackedBytes": 502530,
+  "nativeAndRemoteModesBlobsWorkingBytesExact": true,
+  "trackedCheckoutClean": true,
+  "qaBranch": "qa/tracelet-20261105",
+  "qaRetiredAtSameCommit": true,
+  "noActiveWorkflows": true,
+  "production": {
+    "project": "prj_i0QdbrvEt3So3iYe8lKvWGSlNaTw",
+    "deployment": "dpl_8aUQuMm9pYM1BrUeXTqD57bJ3Ucg",
+    "state": "READY",
+    "source": "8026196dfb446019bce92e469faaff738493c705",
+    "canonical": "https://tracelet-three.vercel.app"
+  },
+  "anonymousHTTP": {
+    "status": 200,
+    "credentials": false,
+    "allFiveSourceExact": true,
+    "files": {
+      "index": {
+        "bytes": 3609,
+        "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+      },
+      "style": {
+        "bytes": 4244,
+        "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+      },
+      "icon": {
+        "bytes": 173,
+        "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+      },
+      "integrity": {
+        "bytes": 2197,
+        "sha256": "e74989f754817c126aa3234b2b1e52ee5d5b8ca77a14ea4c5a4c5896e68af9db"
+      },
+      "archive": {
+        "bytes": 82852,
+        "sha256": "992bf5e22d0da491bda85b05d298781bd3fa1c1a08b0eada8cbf116defde7e89"
+      }
+    }
+  },
+  "acceptedSource": {
+    "preparation": "50d31bc739e1b6bde6b68d18979accd4b1943839",
+    "runId": 41986491584,
+    "unchangedInputs": 49,
+    "totalInputs": 53,
+    "changedOrRetiredInputs": [
+      ".github/workflows/tracelet-acceptance.yml",
+      "AGENTS.md",
+      "README.md",
+      "scripts/package.mjs"
+    ],
+    "extensionInputsUnchanged": 12,
+    "noBrowserRerun": true
+  },
+  "archive": {
+    "checkedEdition": {
+      "bytes": 81672,
+      "sha256": "b98a549d125504d7c3f7397e28472efe0b02b60a33fce5bc6f62615a64ec6c2f",
+      "members": 12
+    },
+    "deliveredEdition": {
+      "bytes": 82852,
+      "sha256": "992bf5e22d0da491bda85b05d298781bd3fa1c1a08b0eada8cbf116defde7e89",
+      "members": 13,
+      "addition": "exact root MIT LICENSE; all 12 extension files unchanged",
+      "crcAndMemberEqualityVerified": true
+    }
+  },
+  "thisFileEdition": "This receipt is an additive documentation-only follow-up to the receipt-bearing commit above. It does not claim its own commit/deployment identity or another browser invocation.",
+  "limits": [
+    "No macOS/real-device/long-duration/quota/universal-website/human fresh-install/Chrome Web Store proof.",
+    "Earlier retained failed-run residue and precise unknown causes remain qualified in their immutable attempts.",
+    "Full portfolio goal remains active; four non-priority projects remain deferred."
+  ]
+}
