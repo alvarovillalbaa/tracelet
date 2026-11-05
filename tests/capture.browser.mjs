@@ -185,6 +185,8 @@ async function journey() {
   await bounded(new Promise((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); }), 5000, 'Owned fixture could not listen.');
   fixtureOrigin = `http://127.0.0.1:${server.address().port}`;
   await stage('launch-installed-extension', async () => {
+    report.observations.temporaryRootBytes = Buffer.byteLength(dirs.tmp);
+    assert(report.observations.temporaryRootBytes + 64 < 108, 'Owned temporary path leaves insufficient room for Chromium socket names.');
     launchAttempted = true;
     context = await chromium.launchPersistentContext(dirs.profile, {
       channel: 'chromium', headless: false, acceptDownloads: true, downloadsPath: dirs.downloads,

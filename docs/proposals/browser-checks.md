@@ -22,8 +22,11 @@ then explicitly bind the original tab and approve the recorded click/field.
 If the browser action cannot be operated, preserve that failure and its exact
 stage; never relabel the two workspace journeys as capture acceptance.
 
-The external runner installs pinned Playwright 1.58.2/Chromium and xdotool only
-inside this disposable CI scope. npm's 1.58.2 integrity was read before selection.
+The current external runner installs pinned Playwright 1.64.1/Chromium and xdotool
+only inside this disposable CI scope. Its version/integrity was read before
+selection; earlier 1.58.2 launch failures remain preserved in the owning results.
+Short private `/tmp/tl-*` storage and prelaunch socket-path budgets retain
+isolation while fitting Chromium's Unix socket limit.
 `scripts/browser-ci.py` caps each command's time and output, retains compressed
 raw stdout/stderr with hashes, records all source bytes/modes before and after,
 checks reaped process groups and removes only its owned scratch/generated files.

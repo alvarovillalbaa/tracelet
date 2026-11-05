@@ -15,8 +15,9 @@ import zlib
 
 ROOT = Path(__file__).resolve().parent.parent
 assert os.environ.get('CI') == 'true' and os.environ.get('RUNNER_OS') == 'Linux'
-SCRATCH = Path(tempfile.mkdtemp(prefix='tracelet-ci-', dir=os.environ['RUNNER_TEMP']))
+SCRATCH = Path(tempfile.mkdtemp(prefix='tl-', dir='/tmp'))
 SCRATCH_ID = SCRATCH.stat()
+assert len(str(SCRATCH).encode()) <= 20, 'Keep Chromium Unix socket roots short.'
 os.environ['TRACELET_SCRATCH'] = str(SCRATCH)
 os.environ['PLAYWRIGHT_BROWSERS_PATH'] = str(SCRATCH / 'browsers')
 os.environ['npm_config_cache'] = str(SCRATCH / 'npm-cache')
@@ -135,7 +136,9 @@ try:
     report['guards'].append({'stage': 'before', 'files': baseline, 'matched': True})
     run('static', ['node', 'scripts/check.mjs'])
     run('package', ['node', 'scripts/package.mjs'])
-    run('browser-tooling', ['npm', 'install', '--prefix', str(TOOLING), '--no-save', '--ignore-scripts', '--package-lock=false', '--no-audit', '--no-fund', 'playwright@1.58.2'], cap=180)
+    run('browser-tooling', ['npm', 'install', '--prefix', str(TOOLING), '--no-save', '--ignore-scripts', '--package-lock=false', '--no-audit', '--no-fund', 'playwright@1.64.1'], cap=180)
+    runtime_program = 'const fs=require("node:fs"); const p=JSON.parse(fs.readFileSync(' + json.dumps(str(TOOLING / 'node_modules/playwright/package.json')) + ',"utf8")); if(p.version!=="1.64.1")throw Error("Unexpected browser tooling version"); console.log(JSON.stringify({node:process.version,playwright:p.version}));'
+    report['runtime'] = json.loads(run('runtime-identity', ['node', '-e', runtime_program]))
     run('chromium-install', ['node', str(TOOLING / 'node_modules/playwright/cli.js'), 'install', '--with-deps', 'chromium'], cap=300)
     run('native-input-tooling', ['sudo', 'apt-get', 'install', '-y', 'xdotool'], cap=120)
     assert vector() == baseline

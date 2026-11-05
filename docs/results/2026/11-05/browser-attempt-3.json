@@ -1,0 +1,509 @@
+{
+  "kind": "tracelet-browser-attempt",
+  "attempt": 3,
+  "runId": 41980142441,
+  "jobId": 127088110103,
+  "runURL": "https://github.com/alvarovillalbaa/tracelet/actions/runs/41980142441",
+  "preparation": "4f11e0ebf038b91953d5eaafa18e9edb71a7bea0",
+  "activation": "08ece4e80459742ded2240b9685813e1f593d494",
+  "conclusion": "chromium-sigtrap-before-context",
+  "controller": {
+    "kind": "tracelet-browser-ci",
+    "startedAtUTC": "2026-11-05T06:24:07Z",
+    "commands": [
+      {
+        "label": "static",
+        "args": [
+          "node",
+          "scripts/check.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:07Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 2589,
+          "sha256": "748c237df1ab8f5267a0407a3a291c97b03dc62ac15c915c8eba3cce2e602671",
+          "zlibBase64": "eJyllj2P2zAMhvf+CkGzz27RokM6denUqR2LolBkOtZFlgSKzgcO999L54zDJVb8dZMhSw8pvnxh80nujSvlRhIqDRboIZIiox90DXofZSaDihH4BGELmXxUBxU1mkA/jIUoN58+88voXb/8msmaGtuvvmTSeq3sdw5Bv6ACBKcv1MdMmiZ4JF78eZIVn+dLwInAReNdYc22KLd589hdgRTugHg/L44e95X1x8vOc5YgfVXxBQHcEH4TNIkGH9qQxqbzdicAlycd4+ZljYFbty7xCHov90v3Y3ExyC3qfAmbzjBIRSQ0mpah1cJUQVG9jNC1seW/gJ59uDBZizYFsIR7tRuo2NdTcKrGREjmGkeXEvfEGGNW1KTxHMi/pQgiM1v0xzh08rglptFrHeacT0o+Dd7KN03ciDcNrJGuJgpDQqtALUL+DtHnhEiJP48bacKcAOlmzCGTTZkD3mvOHHZ9k+5+jxZUTCZRMoL2WBq3y7v1GoPMiDDa5xl8t7EKPDRD7PWPtbbg6QDp+45yeV5cjzXXP9a/PGGh99VP05huGJK/z47UKRPRt6hB4OvUJJQrRQnaKoRSsDHU1lhDhne8s+dvwnnBocpWk2j4YUG8jFiZ6N2TiQZKo0RvqoyDB6vOwqNQyEY8gIATaPaTd7l8/vAfDs2RKg=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:07Z"
+      },
+      {
+        "label": "package",
+        "args": [
+          "node",
+          "scripts/package.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:07Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 135,
+          "sha256": "1145859953d6abc32e0fd3662c3d12ae8b4b12486eb8939f7774dbec26048831",
+          "zlibBase64": "eJwVzcEOwiAMgOG7j9HzJKXQAnsbYG1cMo1xu0zju4v3P9//AVs3fdS7wgzHq3bd9Lii8w7de33CBO08dIc5e0k0wX6rxDLaVnLlWBZPzBiX1IOlUJJSjonUFBtSE6whWFduXUxIPFeJ2qWTDfl/HrKn7+UHegQmPA=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:07Z"
+      },
+      {
+        "label": "browser-tooling",
+        "args": [
+          "npm",
+          "install",
+          "--prefix",
+          "/home/runner/work/_temp/tracelet-ci-v7t2fkvg/tooling",
+          "--no-save",
+          "--ignore-scripts",
+          "--package-lock=false",
+          "--no-audit",
+          "--no-fund",
+          "playwright@1.58.2"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:07Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 24,
+          "sha256": "65c731cd02e19c79f6f5a3e84a4dd64a49acd6c47d2ee551d7cc9da191e8c96c",
+          "zlibBase64": "eJzjSkxJSU1RMFIoSEzOTkxPLVbIzFMwKuYCAF4uB3Q="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:09Z"
+      },
+      {
+        "label": "chromium-install",
+        "args": [
+          "node",
+          "/home/runner/work/_temp/tracelet-ci-v7t2fkvg/tooling/node_modules/playwright/cli.js",
+          "install",
+          "--with-deps",
+          "chromium"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:09Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 15838,
+          "sha256": "6f7bb9b018e5ca146495454b79a20179878c56e0c5d659e9fe4a90adb6b8143f",
+          "zlibBase64": "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"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:31Z"
+      },
+      {
+        "label": "native-input-tooling",
+        "args": [
+          "sudo",
+          "apt-get",
+          "install",
+          "-y",
+          "xdotool"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:31Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 1928,
+          "sha256": "0adf7181ab4c542117d74a6edff7e8a9d9c75302b9460d3b677e987359dace4a",
+          "zlibBase64": "eJyllVtv0zAUx98j9Tucl2mdtDqJk3ZteWIS8MSEBoiHCU1OfNpaS+3Il1349Nhu2gGatwEPreIc//w/J+fiS2RcyDX0rL1ha4ROGGsIIdm5E120cOxRcpTtA1iNGGyXA2QsswhCrpTeMiuUDMYvG4SV6jp1F7YwzkWwsG4vYeBOdB00AfQHdB3yZQZeuLnnqvoDv3j37XUc+D+rVJcV4Pq1Zhz5KVCQeNc9PAKnUIBVoHGrbhGY5EArkMoeGJJdIPKwZ40WZjWZw805qBUw3W7ELRqSvV1Z1GA3woDqUce4vVRx2PkYMRfmBoz3Hw++OxNEPqBdlrASHS5ztG3Oeht+k63QWmlD7L2Fj/E55AOuyrqG8+8Ro7Cxtl/mOfvhNJLBL+IaJ60jrdrmu0cfVtNh7qS3auOD3fJZffhau1W5rAgtylkxL6aknEybkPMSrigl1EezE6z+S3BIywuCNSWzKPjef42NT8D+ywsJhYHxoir9Kjcn2WfssLWxYjXeCuWMz6+TJr724GMdx0CXUZeMsvG+ZjmzrGHeP1+rMHr69fQoYSiLpCXJ0CRDk0yVZKokUyeZOslMk8w0ycySzCzJnCWZsyQzTzLzJLNIMotncppOUDmj9Cz2qYnTggvty0xp4det0xql/XW8kJNR9kljz3Q4yg8RJ0M9hrPyoSCvy6OKPdUE17tK5diE7aPsa0TDOb+VMoyf7qGTHfXa9hjakqT9HXb8g7/7ln/JUxv9dP1fBnjAXqfzSasWjYkBarFe+9nk7xcNWyYnvIExJSUlxaSOEB2gC38lNIcLcCiJNwOTM2fVxPU8Xn4m3h/HVjs8fkbOx9hOGj/OvGC1mBS7mTkni0HxJyCjXjo="
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:33Z"
+      },
+      {
+        "label": "installed-workspace",
+        "args": [
+          "node",
+          "tests/browser.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:24:33Z",
+        "completeEOF": true,
+        "exitCode": 1,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 10812,
+          "sha256": "13baf5d2d7e9e8af4700436bfeba225762ef623a45001262d7c47beac40ae872",
+          "zlibBase64": "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"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:24:34Z"
+      }
+    ],
+    "guards": [
+      {
+        "stage": "before",
+        "files": [
+          {
+            "path": ".github/workflows/tracelet-acceptance.yml",
+            "mode": 420,
+            "bytes": 520,
+            "sha256": "2b559324b81765c659f6222fa18f00f988c95463d52082485e9952502707557b"
+          },
+          {
+            "path": ".gitignore",
+            "mode": 420,
+            "bytes": 95,
+            "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+          },
+          {
+            "path": "AGENTS.md",
+            "mode": 420,
+            "bytes": 2109,
+            "sha256": "cfb57d1f5a12833319ce8326196f39a25af41412612e8d78af8dfd4e43c31f19"
+          },
+          {
+            "path": "LICENSE",
+            "mode": 420,
+            "bytes": 1072,
+            "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+          },
+          {
+            "path": "README.md",
+            "mode": 420,
+            "bytes": 3425,
+            "sha256": "0e249fb09655a3acd4177b506a38da59fd526a676e28f0cadcfdf8e8b3e21654"
+          },
+          {
+            "path": "docs/architecture.md",
+            "mode": 420,
+            "bytes": 3503,
+            "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+          },
+          {
+            "path": "docs/proposals/browser-checks.md",
+            "mode": 420,
+            "bytes": 2626,
+            "sha256": "2d0af80a887dde8048e4b9f46848a441bed00516bec51961389752eca3af2611"
+          },
+          {
+            "path": "docs/proposals/browser-checks.yml.example",
+            "mode": 420,
+            "bytes": 512,
+            "sha256": "f5e2db30f2ba9357363c57cbb95965092c78b6eda7612191eade91fb3252f090"
+          },
+          {
+            "path": "docs/proposals/focused-checks.md",
+            "mode": 420,
+            "bytes": 3255,
+            "sha256": "a7525a3830b66dc4d43b8c5afd1215e23e3dbcab7ae8f284ee5471a02606fe41"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.json",
+            "mode": 420,
+            "bytes": 1703,
+            "sha256": "0d9b35846fcedbab73d870905421a41dc512213d1057e1c3bdc654724df7e4db"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.md",
+            "mode": 420,
+            "bytes": 1132,
+            "sha256": "2db2ed35b638e37c5adce6dc0e4bd179e8580de5c6e96e671faecce8cb8f3aad"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.json",
+            "mode": 420,
+            "bytes": 22040,
+            "sha256": "d887c3ef9f03efb6e7d5833d4b6598484e13f2fc21f8deb69a68ace314112e03"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.md",
+            "mode": 420,
+            "bytes": 1553,
+            "sha256": "68bd284fc448f5d6e7886097fa666852d921920df2675f20e87761d7fc24fdf5"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.json",
+            "mode": 420,
+            "bytes": 13997,
+            "sha256": "022e723a0ab1acb1c29dfad166973ebfdf6abf67ef28cb01b7b2b90f738b81fd"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.md",
+            "mode": 420,
+            "bytes": 2182,
+            "sha256": "1f52a2816cdb960f0a2ff6c3430c540e7e13dd049e320876390ea46596a9b652"
+          },
+          {
+            "path": "docs/spec.md",
+            "mode": 420,
+            "bytes": 4157,
+            "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+          },
+          {
+            "path": "extension/content.js",
+            "mode": 420,
+            "bytes": 11671,
+            "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+          },
+          {
+            "path": "extension/lib/db.mjs",
+            "mode": 420,
+            "bytes": 7012,
+            "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+          },
+          {
+            "path": "extension/lib/workflow.mjs",
+            "mode": 420,
+            "bytes": 6734,
+            "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+          },
+          {
+            "path": "extension/manifest.json",
+            "mode": 420,
+            "bytes": 805,
+            "sha256": "8fa9e7bfc9002ac42ced2596d63257c0ce915ff5a7163062c86669dbb0783033"
+          },
+          {
+            "path": "extension/offscreen.html",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+          },
+          {
+            "path": "extension/offscreen.mjs",
+            "mode": 420,
+            "bytes": 3967,
+            "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+          },
+          {
+            "path": "extension/popup.html",
+            "mode": 420,
+            "bytes": 2127,
+            "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+          },
+          {
+            "path": "extension/popup.mjs",
+            "mode": 420,
+            "bytes": 2255,
+            "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+          },
+          {
+            "path": "extension/ui.css",
+            "mode": 420,
+            "bytes": 11316,
+            "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+          },
+          {
+            "path": "extension/worker.mjs",
+            "mode": 420,
+            "bytes": 11567,
+            "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+          },
+          {
+            "path": "extension/workspace.html",
+            "mode": 420,
+            "bytes": 5127,
+            "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+          },
+          {
+            "path": "extension/workspace.mjs",
+            "mode": 420,
+            "bytes": 17492,
+            "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+          },
+          {
+            "path": "package.json",
+            "mode": 420,
+            "bytes": 394,
+            "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+          },
+          {
+            "path": "scripts/browser-ci.py",
+            "mode": 420,
+            "bytes": 9712,
+            "sha256": "3f1ebde5bd0b5f300abf51572954eeeb4a96b9d425eb201a21c609ae4f839dae"
+          },
+          {
+            "path": "scripts/check.mjs",
+            "mode": 420,
+            "bytes": 7975,
+            "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+          },
+          {
+            "path": "scripts/local-checks.py",
+            "mode": 420,
+            "bytes": 4842,
+            "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+          },
+          {
+            "path": "scripts/package.mjs",
+            "mode": 420,
+            "bytes": 4595,
+            "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+          },
+          {
+            "path": "site/icon.svg",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+          },
+          {
+            "path": "site/index.html",
+            "mode": 420,
+            "bytes": 3609,
+            "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+          },
+          {
+            "path": "site/style.css",
+            "mode": 420,
+            "bytes": 4244,
+            "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+          },
+          {
+            "path": "tests/browser.mjs",
+            "mode": 420,
+            "bytes": 22041,
+            "sha256": "da1caefb4a234fd1d285a5f9c96a6fbdbc1ea2a2944437042af27db321d9da3c"
+          },
+          {
+            "path": "tests/capture.browser.mjs",
+            "mode": 420,
+            "bytes": 24381,
+            "sha256": "505594cd465c22bdba9125ef70129a169912bc74e7b36f539193624b7d26435b"
+          },
+          {
+            "path": "tests/recording.test.mjs",
+            "mode": 420,
+            "bytes": 10828,
+            "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+          },
+          {
+            "path": "tests/workflow.test.mjs",
+            "mode": 420,
+            "bytes": 11362,
+            "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+          },
+          {
+            "path": "vercel.json",
+            "mode": 420,
+            "bytes": 597,
+            "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+          }
+        ],
+        "matched": true
+      },
+      {
+        "stage": "before-browser",
+        "matched": true
+      },
+      {
+        "stage": "after-working-bytes",
+        "matched": true
+      },
+      {
+        "stage": "after-git-head-index-status-ignored",
+        "matched": true
+      }
+    ],
+    "cleanup": {
+      "commandGroupsGone": true,
+      "generatedOutputRemoved": true
+    },
+    "errors": [
+      "installed-workspace failed; preserved output belongs to this attempt",
+      "cleanup: Browser-owned residue retained: ['tracelet-B01-B0m8Y3']"
+    ],
+    "head": "08ece4e80459742ded2240b9685813e1f593d494",
+    "tree": "548a7f998e8ab5abab3a0d8e5141e35fa6846386",
+    "preparation": "4f11e0ebf038b91953d5eaafa18e9edb71a7bea0",
+    "finishedAtUTC": "2026-11-05T06:24:34Z",
+    "interrupted": false,
+    "passed": false
+  },
+  "browser": {
+    "kind": "tracelet-browser-checks",
+    "cases": [
+      {
+        "id": "B01",
+        "status": "failed",
+        "downloads": [],
+        "cleanup": {
+          "contextClosed": false,
+          "error": "Browser ownership is uncertain; retain its directory."
+        },
+        "error": "browserType.launchPersistentContext: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> [scratch]/browsers/chromium-1208/chrome-linux64/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-extensions-except=/home/runner/work/tracelet/tracelet/extension --load-extension=/home/runner/work/tracelet/tracelet/extension --user-data-dir=[scratch]/tracelet-B01-B0m8Y3/profile --remote-debugging-pipe about:blank\n<launched> pid=3316\n[pid=3316][err] [1105/062434.591943:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\n[pid=3316][err] [1105/062434.591991:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\nCall log:\n  - <launching> [scratch]/browsers/chromium-1208/chrome-linux64/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-extensions-except=/home/runner/work/tracelet/tracelet/extension --load-extension=/home/runner/work/tracelet/tracelet/extension --user-data-dir=[scratch]/tracelet-B01-B0m8Y3/profile --remote-debugging-pipe about:blank\n  - <launched> pid=3316\n  - [pid=3316][err] [1105/062434.591943:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\n  - [pid=3316][err] [1105/062434.591991:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\n  - [pid=3316] <gracefully close start>\n  - [pid=3316] <kill>\n  - [pid=3316] <will force kill>\n  - [pid=3316] <process did exit: exitCode=null, signal=SIGTRAP>\n  - [pid=3316] starting temporary directories cleanup\n  - [pid=3316] finished temporary directories cleanup\n  - [pid=3316] <gracefully close end>\n",
+        "errorEvidence": {
+          "messageBytes": 4908,
+          "messageSha256": "efe9433a9513d896acfbbae53a27159bd658aa08c81a93fb49bd1384f1b658d6",
+          "sanitizedMessageBytes": 4768,
+          "head": "browserType.launchPersistentContext: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> [scratch]/browsers/chromium-1208/chrome-linux64/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-che",
+          "tail": "ck --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-extensions-except=/home/runner/work/tracelet/tracelet/extension --load-extension=/home/runner/work/tracelet/tracelet/extension --user-data-dir=[scratch]/tracelet-B01-B0m8Y3/profile --remote-debugging-pipe about:blank\n<launched> pid=3316\n[pid=3316][err] [1105/062434.591943:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\n[pid=3316][err] [1105/062434.591991:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\nCall log:\n  - <launching> [scratch]/browsers/chromium-1208/chrome-linux64/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-extensions-except=/home/runner/work/tracelet/tracelet/extension --load-extension=/home/runner/work/tracelet/tracelet/extension --user-data-dir=[scratch]/tracelet-B01-B0m8Y3/profile --remote-debugging-pipe about:blank\n  - <launched> pid=3316\n  - [pid=3316][err] [1105/062434.591943:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq: No such file or directory (2)\n  - [pid=3316][err] [1105/062434.591991:ERROR:third_party/crashpad/crashpad/util/file/file_io_posix.cc:145] open /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq: No such file or directory (2)\n  - [pid=3316] <gracefully close start>\n  - [pid=3316] <kill>\n  - [pid=3316] <will force kill>\n  - [pid=3316] <process did exit: exitCode=null, signal=SIGTRAP>\n  - [pid=3316] starting temporary directories cleanup\n  - [pid=3316] finished temporary directories cleanup\n  - [pid=3316] <gracefully close end>\n",
+          "truncated": false
+        },
+        "launchFailedBeforeContext": true,
+        "durationMs": 567
+      },
+      {
+        "id": "B02",
+        "status": "unrun",
+        "reason": "The preceding launch did not return a browser context; no repeated launch was attempted."
+      }
+    ],
+    "passed": 0,
+    "failed": 1,
+    "unrun": 1,
+    "pageErrors": [],
+    "unexpectedRequests": 0,
+    "fixtureRequests": 0,
+    "interrupted": false,
+    "cleanup": {
+      "serverClosed": true,
+      "contextsClosed": true,
+      "parentIdentityUnchanged": true
+    },
+    "proofLimits": [
+      "Two real installed-extension workspace journeys: desktop and plain narrow viewport.",
+      "Real chooser imports, IndexedDB persistence, edits, JSON/Markdown downloads and confirmed deletion.",
+      "No tabCapture, recording, permission grant, replay dispatch, touch, store or production acceptance.",
+      "Context-close acknowledgments and owned-directory identities are recorded; outer CI owns process inventory."
+    ],
+    "stoppedAfterLaunchFailure": "B01"
+  },
+  "observedFailure": "B01 Chromium 145 process exited SIGTRAP before a context returned. Full original error is 4908 bytes/SHA efe9433a9513d896acfbbae53a27159bd658aa08c81a93fb49bd1384f1b658d6; retained sanitized error is not truncated. Only missing CPU frequency Crashpad reads are logged; exact trap cause remains unobserved. B02 and C01 were unrun.",
+  "nextCandidate": {
+    "concreteHarnessDefect": "Browser TMPDIR was 68 bytes before Chromium's unique-directory/socket suffix, risking Linux AF_UNIX overflow. Chromium source fatals when its full socket path exceeds sockaddr_un.sun_path.",
+    "causality": "This is a source-supported harness defect and candidate repair, not a claim that prior SIGTRAP's precise cause is proved.",
+    "changes": [
+      "Short owned /tmp/tl-* task root and prelaunch socket-path budget assertion; all ownership checks retained.",
+      "External runner Playwright updated from 1.58.2 to currently verified 1.64.1 and its bundled Chromium; no app dependency change."
+    ],
+    "sources": [
+      "https://chromium.googlesource.com/chromium/src/+/main/chrome/browser/process_singleton_posix.cc",
+      "https://github.com/microsoft/playwright-java/issues/1871",
+      "https://playwright.dev/docs/chrome-extensions"
+    ],
+    "npmVerified": {
+      "version": "1.64.1",
+      "integrity": "sha512-HCrVhHr5QQuwYoswEUGTb7gGp522yflbv/ST8nF4sFWGuLjQCt17Q/EubpGGSNKYn1tsTCPZxqHhHCfVURu7UA=="
+    }
+  }
+}

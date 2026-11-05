@@ -169,6 +169,8 @@ async function journey(chromium, fixtureOrigin, configuration) {
     const validFile = path.join(owned, 'authored-workflow.json'), invalidFile = path.join(owned, 'invalid-workflow.json');
     await fs.writeFile(validFile, JSON.stringify(imported), { flag: 'wx', mode: 0o600 });
     await fs.writeFile(invalidFile, '{"format":"tracelet","version":1,', { flag: 'wx', mode: 0o600 });
+    item.tmpPathBytes = Buffer.byteLength(directories.tmp);
+    assert(item.tmpPathBytes + 64 < 108, 'Owned Chromium temporary path exceeds the conservative Unix socket budget.');
     launchAttempted = true;
     context = await chromium.launchPersistentContext(directories.profile, {
       channel: 'chromium', headless: true, acceptDownloads: true, downloadsPath: directories.downloads,
