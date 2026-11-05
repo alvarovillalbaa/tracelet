@@ -10,7 +10,7 @@ const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const extension = path.join(root, 'extension');
 const cases = [{ id: 'B01', viewport: { width: 1440, height: 1000 } },
   { id: 'B02', viewport: { width: 390, height: 844 } }];
-const report = { kind: 'tracelet-browser-checks', cases: [], passed: 0, failed: 0, pageErrors: [],
+const report = { kind: 'tracelet-browser-checks', cases: [], passed: 0, failed: 0, unrun: 0, pageErrors: [],
   unexpectedRequests: 0, fixtureRequests: 0, interrupted: false, cleanup: {},
   proofLimits: [
     'Two real installed-extension workspace journeys: desktop and plain narrow viewport.',
@@ -22,9 +22,22 @@ const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const contexts = new Set(), closing = new Map();
 let interrupted = false, server, serverClosed = false, scratchHandle, scratchIdentity;
 const scratch = process.env.TRACELET_SCRATCH;
+function errorEvidence(error) {
+  const raw = Buffer.from(String(error?.message ?? error));
+  const sanitized = Buffer.from(raw.toString('utf8').replaceAll(scratch || '\u0000', '[scratch]')
+    .replace(/https?:\/\/[^\s)]+/g, '[authored-url]'));
+  const excerpt = (bytes, limit, tail = false) => {
+    let text = (tail ? bytes.subarray(-limit) : bytes.subarray(0, limit)).toString('utf8');
+    while (Buffer.byteLength(text) > limit) text = tail ? text.slice(1) : text.slice(0, -1);
+    return text;
+  };
+  return { messageBytes: raw.length, messageSha256: sha(raw), sanitizedMessageBytes: sanitized.length,
+    head: excerpt(sanitized, 500), tail: sanitized.length > 500 ? excerpt(sanitized, Math.min(6000, sanitized.length - 500), true) : '',
+    truncated: sanitized.length > 6500 };
+}
 function errorText(error) {
-  return String(error?.message ?? error).replaceAll(scratch || '\u0000', '[scratch]')
-    .replace(/https?:\/\/[^\s)]+/g, '[authored-url]').slice(0, 1600);
+  const evidence = errorEvidence(error);
+  return evidence.head + (evidence.truncated ? '\n[...message middle omitted...]\n' : '') + evidence.tail;
 }
 function bounded(promise, milliseconds, label) {
   let timer;
@@ -243,7 +256,10 @@ async function journey(chromium, fixtureOrigin, configuration) {
     await narrowLayout(page, item, configuration, 'empty-library');
     assert.equal(item.pageErrorCount ?? 0, 0); assert.equal(item.unexpectedRequests ?? 0, 0);
     checkActive(); item.status = 'passed';
-  } catch (error) { item.error = errorText(error); }
+  } catch (error) {
+    item.error = errorText(error); item.errorEvidence = errorEvidence(error);
+    item.launchFailedBeforeContext = launchAttempted && !context;
+  }
   finally {
     try {
       if (context) { await bounded(closeContext(context), 10_000, 'Extension context did not close.'); closeAcknowledged = true; }
@@ -281,9 +297,10 @@ try {
   const address = server.address(); assert(address && typeof address === 'object');
   for (const configuration of cases) {
     await journey(chromium, `http://127.0.0.1:${address.port}`, configuration);
+    if (report.cases.at(-1)?.launchFailedBeforeContext) { report.stoppedAfterLaunchFailure = configuration.id; break; }
     if (interrupted || contexts.size) break;
   }
-} catch (error) { report.error = errorText(error); }
+} catch (error) { report.error = errorText(error); report.errorEvidence = errorEvidence(error); }
 finally {
   for (const context of contexts) {
     try { await bounded(closeContext(context), 10_000, 'Extension context remained open.'); }
@@ -299,9 +316,11 @@ finally {
   report.cleanup.serverClosed = serverClosed; report.cleanup.contextsClosed = contexts.size === 0;
   if (scratchHandle) { try { await verifyScratch(); report.cleanup.parentIdentityUnchanged = true; } catch (error) { report.cleanup.scratchError = errorText(error); } await scratchHandle.close(); }
   clearTimeout(workTimer);
-  for (const configuration of cases) if (!report.cases.some(item => item.id === configuration.id)) report.cases.push({ id: configuration.id, status: 'unrun' });
+  for (const configuration of cases) if (!report.cases.some(item => item.id === configuration.id)) report.cases.push({ id: configuration.id, status: 'unrun',
+    ...(report.stoppedAfterLaunchFailure ? { reason: 'The preceding launch did not return a browser context; no repeated launch was attempted.' } : {}) });
   report.passed = report.cases.filter(item => item.status === 'passed').length;
-  report.failed = report.cases.length - report.passed;
+  report.failed = report.cases.filter(item => item.status === 'failed').length;
+  report.unrun = report.cases.filter(item => item.status === 'unrun').length;
   const passed = report.passed === 2 && report.failed === 0 && !report.error && !interrupted && report.pageErrors.length === 0 && report.unexpectedRequests === 0
     && serverClosed && contexts.size === 0 && report.cleanup.parentIdentityUnchanged === true;
   if (!passed) process.exitCode = 1;

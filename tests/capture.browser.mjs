@@ -25,8 +25,9 @@ let context, contextClosing, server, owned, ownedHandle, ownedIdentity, scratchH
 let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin;
 const hash = value => createHash('sha256').update(value).digest('hex');
 function clean(error) {
-  return String(error?.message ?? error).replaceAll(scratch || '\u0000', '[scratch]')
-    .replace(/https?:\/\/[^\s)]+/gu, '[authored-url]').replace(/chrome-extension:\/\/[^\s)]+/gu, '[extension-url]').slice(0, 1400);
+  const text = String(error?.message ?? error).replaceAll(scratch || '\u0000', '[scratch]')
+    .replace(/https?:\/\/[^\s)]+/gu, '[authored-url]').replace(/chrome-extension:\/\/[^\s)]+/gu, '[extension-url]');
+  return text.length <= 5400 ? text : `${text.slice(0, 400)}\n[diagnostic middle omitted]\n${text.slice(-5000)}`;
 }
 function bounded(promise, milliseconds, label) {
   let timer;

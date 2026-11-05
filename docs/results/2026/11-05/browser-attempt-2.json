@@ -1,0 +1,433 @@
+{
+  "kind": "tracelet-browser-attempt",
+  "attempt": 2,
+  "runId": 41979566755,
+  "jobId": 127086293124,
+  "runURL": "https://github.com/alvarovillalbaa/tracelet/actions/runs/41979566755",
+  "preparation": "4f676c934526ff9ead652394a42d63b840909d98",
+  "activation": "d496598ce971cd9c15c8ab1d1b7d4f942fa4b2e2",
+  "conclusion": "failure-before-browser-context",
+  "controller": {
+    "kind": "tracelet-browser-ci",
+    "startedAtUTC": "2026-11-05T06:19:00Z",
+    "commands": [
+      {
+        "label": "static",
+        "args": [
+          "node",
+          "scripts/check.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:00Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 2589,
+          "sha256": "8b32e5d1ebcee32cbb7b61475eb87e6ed80eff109b89b3ca6e924a6b71cc5534",
+          "zlibBase64": "eJyllj2P2zAMhvf+CkGzz27RdkmnLp06tWNRFIpMx7rIkkDR+cDh/nvpnHG4xIq/bjJk6SHFly9sPsm9caXcSEKlwQI9RFJk9IOuQe+jzGRQMQKfIGwhk4/qoKJGE+iHsRDl5tNnfhm965dfM1lTY/vVl0xar5X9ziHoF1SA4PSF+phJ0wSPxIs/T7Li83wJOBG4aLwrrNkW5TZvHrsrkMIdEO/nxdHjvrL+eNl5zhKkryq+IIAbwm+CJtHgQxvS2HTe7gTg8qRj3LysMXDr1iUeQe/lful+LC4GuUWdL2HTGQapiIRG0zK0WpgqKKqXEbo2tvwX0LMPFyZr0aYAlnCvdgMV+3oKTtWYCMlc4+hS4p4YY8yKmjSeA/m3FEFkZov+GIdOHrfENHqtw5zzScmnwVv5pokb8aaBNdLVRGFIaBWoRcjfIfqcECnx53EjTZgTIN2MOWSyKXPAe82Zw65v0t3v0YKKySRKRtAeS+N2ebdeY5AZEUb7PIPvNlaBh2aIvf6x1hY8HSB931Euz4vrseb6x/qXJyz0vvppGtMNQ/L32ZE6ZSL6FjUIfJ2ahHKlKEFbhVAKNobaGmvI8I539vxNOC84VNlqEg0/LIiXESsTvXsy0UBplOhNlXHwYNVZeBQK2YgHEHACzX7yLpfPH/4DBQCRKQ=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:00Z"
+      },
+      {
+        "label": "package",
+        "args": [
+          "node",
+          "scripts/package.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:00Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 135,
+          "sha256": "1145859953d6abc32e0fd3662c3d12ae8b4b12486eb8939f7774dbec26048831",
+          "zlibBase64": "eJwVzcEOwiAMgOG7j9HzJKXQAnsbYG1cMo1xu0zju4v3P9//AVs3fdS7wgzHq3bd9Lii8w7de33CBO08dIc5e0k0wX6rxDLaVnLlWBZPzBiX1IOlUJJSjonUFBtSE6whWFduXUxIPFeJ2qWTDfl/HrKn7+UHegQmPA=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:00Z"
+      },
+      {
+        "label": "browser-tooling",
+        "args": [
+          "npm",
+          "install",
+          "--prefix",
+          "/home/runner/work/_temp/tracelet-ci-4_vk__6a/tooling",
+          "--no-save",
+          "--ignore-scripts",
+          "--package-lock=false",
+          "--no-audit",
+          "--no-fund",
+          "playwright@1.58.2"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:00Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 24,
+          "sha256": "4aaef3acc3c4b16766abf61c4f4aa2d3bd413e2fe822d3edd6cfa9d7e7334efa",
+          "zlibBase64": "eJzjSkxJSU1RMFIoSEzOTkxPLVbIzFMwLOYCAF4rB3M="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:02Z"
+      },
+      {
+        "label": "chromium-install",
+        "args": [
+          "node",
+          "/home/runner/work/_temp/tracelet-ci-4_vk__6a/tooling/node_modules/playwright/cli.js",
+          "install",
+          "--with-deps",
+          "chromium"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:02Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 16218,
+          "sha256": "6101827d02959b3334950efc23a8d3668f71924371b383f2c682e97137388024",
+          "zlibBase64": "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"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:21Z"
+      },
+      {
+        "label": "native-input-tooling",
+        "args": [
+          "sudo",
+          "apt-get",
+          "install",
+          "-y",
+          "xdotool"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:21Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 1928,
+          "sha256": "3ca0d5f26e029927af5eab0714bbe27b467e7680f55d596cd962032097838e3c",
+          "zlibBase64": "eJyllclu2zAQhu8C/A5zCeIAMbV67akB2p4aBGmLHoIioMSxTUQmBS5Z+vQhKdlpizBJ24MNUcOP/4xm4SVSxsUGOtrc0A1Cy7XRhJDkzPI2WBh2KBiK5gGMQvS2ywHShhoELtZS7ajhUnjj1y3CWratvPNbKGPcW2i7l9Bwx9sWag+6A9oW2SoBJ1zfM1n+gZ9/+P42DtyfkbJNMrDdRlGG7BQKEHjXPjwBp5CBkaBwJ28RqGBQzEFIc2BIco7I/J4NGphVZAE3ZyDXQFWz5beoSfJ+bVCB2XINskMV4nZS2WHnU8SM6xvQzn88+G61F/mEZpXDmre4StE0Ke2M/012XCmpNDH3Bj6HZ58PuMqrCs5+BKyArTHdKk3pT6uQDH4RW1thLGnkLu0fXVh1i6kVzqq0C3bHZtXha/WrfFWSIstn2SKbknwyrX3Oc7gqClK4aHrB8r8Eh7S8IlgVZBYEP7qvsXUJ2H95LiDTMC5Lv0r1SfIFW2xMqFiFt1xa7fJrhQ6vHfhUxyHQVdAlo2S8r1lGDa2p88/VKoyefz09ihjyLGqJMkWUKaJMGWXKKFNFmSrKTKPMNMrMoswsysyjzDzKLKLMIsoso8zyhZzGE5RP5/O+T3WYFowrV2ZScbdurFIozK/jhZyMkguFHVX+KDdErPD16M9Kh4K8zo9K+lwTXPeVyrD220fJt4D6c34rZRg/30MnPfXW9hjaksT9HXb8g7/7ln/NUxP8tN1fBnjA3qZzoWSDWocAFd9s3Gxy94uCHRUTVsO4IHlBskkVoGKAzt2VUB8uwKEk3g1MSq2RE9uxcPnpcH8cG2Xx+AU5F2Mzqd04c4LlcpL1M3NBloPiI0bRXkI="
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:24Z"
+      },
+      {
+        "label": "installed-workspace",
+        "args": [
+          "node",
+          "tests/browser.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:19:24Z",
+        "completeEOF": true,
+        "exitCode": 1,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 4221,
+          "sha256": "85b2278e3e92f042d61b6bfd3f0522e43175c846965f617b7233e9a8cde410ac",
+          "zlibBase64": "eJztV8tuGzcU3fcrCK2HebhBESh1gfiBOkViC7KMLpIgoMg7GlYckiU5klXD/95zZ2R77DZA14U3lnQfvIf3dejF/P3x6cfTxbej+cXvl6fzb/PT2cV8cXgzWVtvJtNJSUqToyKXKWwzJakb0us8qSZaZcqT6eebiWXDo1evIcxFlQ7SSa2sIwOJCVvvgjJs+hVejpTv4mR6M9HBF7ouxy5kWE5r5TJVE0opJD5viCfgTik3NgqbRec1paKsfycS8aewJQtjE+kS0u7F5PbhgD3gxS7SC6fg2cxwkM2FfDkeQk/FQqUVFRHViiqxByRCEntn0agslkRe6B7lF38Hy4VVnn7xX/zPw9nWr34Rn7NOqujm68u9f36pmxRa27Xy9cGrt8Mvks767vqnN/ufQkpjs1o6krUlZ2RJVjkJNLVdjZRLpderFDpvpKeyDQkl+o6+2BalKji+FPc9K8hl0Np1hozcotyA/MRQ1iFtVTJSK9R9rEyk1lGZkUg7i8zKbA3J2NjMKZGGCkpjgx8bhjYGz7ZINvkMbUb80oxvwBXJ/+rURaMKY/EBx9eqc0+ac+R1p1cx5kfijcxNK7uMKCP5A55xTQgtnSgfvt8Ea668J005q7Q7ImSHrvruPubAlzuvqyOGD+3pBmBPbI7cEAtM0TqfB0NzasNGueqEcklhN0uhxqBc3PVVPwzVCer/iYxV89AVgs0GSU3Vry4s9wpu4BRcrs5KifkqrpIylKuPgH+xoeTUrno4IFUzjEo5C45rXi0am8xMpbK7xNAgA/zdcpF6bVI+O2S4et+VcEKnjjb8a04eGE6C7lpcrLqI6DH7l2K3MxzOGSP/OGHHJ7NLnTA9uQnlnLaXXaqxTWCpnAtbGVNf19YWaX3syijpjULztEAEhCOxjVrWLoS+dyO6+x/NFUPsoly6oJ9MB6zbWGTwMlEMeRws9VdD+zyaDRigvpohupDYnyt1mNNqCVVLmFKd4atDGkbJu93QlbVNucjUMa6ocsaoGplxEzpcqmw1xF0mXA8DtqadbniR9Z7ogI1FSIXUD/50HUMqsqjVClMaTT3CnUkl3SDtK+sBswnsmvuMcwifVU1uN+76EtAz8HO1vM4YOpW45n3tzAq+axv7SVNFooWQkUTDenuoLkNr1ZOsW1+jNVP+z+DurTAyD2cPkGXe2rrkBh3NtW9IGYeJ46+8W3BGcG4frUV7A5KxAT+WWHVrBC6FL3UYk20xiGdhM7DA4UGlNqAlDnUvzJDuDWcBfbw3fdObMn11qb/sJ/DXj2/e3lb3dHfwTHfPdPdMd89090x3z3T3f6S7g7evb0FhXFImrFfVHctND1i6olOmnj3RdR6lQ3uSmdOfHaY9Dx72mofjkawPm7pYRjQ44kluiv1mgL6kjtUDVeXH0qjQyuWDwR9bdleoG8boTg1qRA+H+iPmlgN/niy2ATSqnLAevO1wk4cNKJhfsLwwrn+ELnna5anAilmXEIXyRkTHXesVrrwVG0tb7tMXyNicT0S9A9OkbVmcK/EBI3ZN5uRIxDsW1qBc7CjW/nZ5cf7yk0prfi2I+ydDH6jnwdSSQXj83w1sHOU8iKKWxypyNitxP4YVn9/a3N8BWxGrCkqA3eGZMCzjSpTQ8Uc/ksz2yIvphk2itKZYFMBxlP07QfbsD93ahy3StOIVOKDj54mR9y8QYYfkW5AXirHHRead6BexOP7AHpkjMosg80wT/dPl6+0PfwONHRNq"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:19:25Z"
+      }
+    ],
+    "guards": [
+      {
+        "stage": "before",
+        "files": [
+          {
+            "path": ".github/workflows/tracelet-acceptance.yml",
+            "mode": 420,
+            "bytes": 520,
+            "sha256": "419b30cddc5c82618d9a94d3d592ea14012cc97cfc9352662951d68a7d6102f6"
+          },
+          {
+            "path": ".gitignore",
+            "mode": 420,
+            "bytes": 95,
+            "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+          },
+          {
+            "path": "AGENTS.md",
+            "mode": 420,
+            "bytes": 2109,
+            "sha256": "cfb57d1f5a12833319ce8326196f39a25af41412612e8d78af8dfd4e43c31f19"
+          },
+          {
+            "path": "LICENSE",
+            "mode": 420,
+            "bytes": 1072,
+            "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+          },
+          {
+            "path": "README.md",
+            "mode": 420,
+            "bytes": 3425,
+            "sha256": "0e249fb09655a3acd4177b506a38da59fd526a676e28f0cadcfdf8e8b3e21654"
+          },
+          {
+            "path": "docs/architecture.md",
+            "mode": 420,
+            "bytes": 3503,
+            "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+          },
+          {
+            "path": "docs/proposals/browser-checks.md",
+            "mode": 420,
+            "bytes": 2626,
+            "sha256": "2d0af80a887dde8048e4b9f46848a441bed00516bec51961389752eca3af2611"
+          },
+          {
+            "path": "docs/proposals/browser-checks.yml.example",
+            "mode": 420,
+            "bytes": 512,
+            "sha256": "f5e2db30f2ba9357363c57cbb95965092c78b6eda7612191eade91fb3252f090"
+          },
+          {
+            "path": "docs/proposals/focused-checks.md",
+            "mode": 420,
+            "bytes": 3255,
+            "sha256": "a7525a3830b66dc4d43b8c5afd1215e23e3dbcab7ae8f284ee5471a02606fe41"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.json",
+            "mode": 420,
+            "bytes": 1703,
+            "sha256": "0d9b35846fcedbab73d870905421a41dc512213d1057e1c3bdc654724df7e4db"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.md",
+            "mode": 420,
+            "bytes": 1132,
+            "sha256": "2db2ed35b638e37c5adce6dc0e4bd179e8580de5c6e96e671faecce8cb8f3aad"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.json",
+            "mode": 420,
+            "bytes": 13997,
+            "sha256": "022e723a0ab1acb1c29dfad166973ebfdf6abf67ef28cb01b7b2b90f738b81fd"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.md",
+            "mode": 420,
+            "bytes": 2182,
+            "sha256": "1f52a2816cdb960f0a2ff6c3430c540e7e13dd049e320876390ea46596a9b652"
+          },
+          {
+            "path": "docs/spec.md",
+            "mode": 420,
+            "bytes": 4157,
+            "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+          },
+          {
+            "path": "extension/content.js",
+            "mode": 420,
+            "bytes": 11671,
+            "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+          },
+          {
+            "path": "extension/lib/db.mjs",
+            "mode": 420,
+            "bytes": 7012,
+            "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+          },
+          {
+            "path": "extension/lib/workflow.mjs",
+            "mode": 420,
+            "bytes": 6734,
+            "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+          },
+          {
+            "path": "extension/manifest.json",
+            "mode": 420,
+            "bytes": 805,
+            "sha256": "8fa9e7bfc9002ac42ced2596d63257c0ce915ff5a7163062c86669dbb0783033"
+          },
+          {
+            "path": "extension/offscreen.html",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+          },
+          {
+            "path": "extension/offscreen.mjs",
+            "mode": 420,
+            "bytes": 3967,
+            "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+          },
+          {
+            "path": "extension/popup.html",
+            "mode": 420,
+            "bytes": 2127,
+            "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+          },
+          {
+            "path": "extension/popup.mjs",
+            "mode": 420,
+            "bytes": 2255,
+            "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+          },
+          {
+            "path": "extension/ui.css",
+            "mode": 420,
+            "bytes": 11316,
+            "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+          },
+          {
+            "path": "extension/worker.mjs",
+            "mode": 420,
+            "bytes": 11567,
+            "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+          },
+          {
+            "path": "extension/workspace.html",
+            "mode": 420,
+            "bytes": 5127,
+            "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+          },
+          {
+            "path": "extension/workspace.mjs",
+            "mode": 420,
+            "bytes": 17492,
+            "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+          },
+          {
+            "path": "package.json",
+            "mode": 420,
+            "bytes": 394,
+            "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+          },
+          {
+            "path": "scripts/browser-ci.py",
+            "mode": 420,
+            "bytes": 9712,
+            "sha256": "3f1ebde5bd0b5f300abf51572954eeeb4a96b9d425eb201a21c609ae4f839dae"
+          },
+          {
+            "path": "scripts/check.mjs",
+            "mode": 420,
+            "bytes": 7975,
+            "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+          },
+          {
+            "path": "scripts/local-checks.py",
+            "mode": 420,
+            "bytes": 4842,
+            "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+          },
+          {
+            "path": "scripts/package.mjs",
+            "mode": 420,
+            "bytes": 4595,
+            "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+          },
+          {
+            "path": "site/icon.svg",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+          },
+          {
+            "path": "site/index.html",
+            "mode": 420,
+            "bytes": 3609,
+            "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+          },
+          {
+            "path": "site/style.css",
+            "mode": 420,
+            "bytes": 4244,
+            "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+          },
+          {
+            "path": "tests/browser.mjs",
+            "mode": 420,
+            "bytes": 20714,
+            "sha256": "82ad96228c75e317c993ed4c99838e4f6f29afcf1ea7d8115f1e32c54c997826"
+          },
+          {
+            "path": "tests/capture.browser.mjs",
+            "mode": 420,
+            "bytes": 24276,
+            "sha256": "2664e51ab287fd19a877a9b0a61b9059780096d5e9d1f2fbf9a2eb31156cca89"
+          },
+          {
+            "path": "tests/recording.test.mjs",
+            "mode": 420,
+            "bytes": 10828,
+            "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+          },
+          {
+            "path": "tests/workflow.test.mjs",
+            "mode": 420,
+            "bytes": 11362,
+            "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+          },
+          {
+            "path": "vercel.json",
+            "mode": 420,
+            "bytes": 597,
+            "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+          }
+        ],
+        "matched": true
+      },
+      {
+        "stage": "before-browser",
+        "matched": true
+      },
+      {
+        "stage": "after-working-bytes",
+        "matched": true
+      },
+      {
+        "stage": "after-git-head-index-status-ignored",
+        "matched": true
+      }
+    ],
+    "cleanup": {
+      "commandGroupsGone": true,
+      "generatedOutputRemoved": true
+    },
+    "errors": [
+      "installed-workspace failed; preserved output belongs to this attempt",
+      "cleanup: Browser-owned residue retained: ['tracelet-B01-YPG4rt', 'tracelet-B02-eRJNwY']"
+    ],
+    "head": "d496598ce971cd9c15c8ab1d1b7d4f942fa4b2e2",
+    "tree": "4ed6a37805414759ef3beaa8ebb4356c0dd473b3",
+    "preparation": "4f676c934526ff9ead652394a42d63b840909d98",
+    "finishedAtUTC": "2026-11-05T06:19:25Z",
+    "interrupted": false,
+    "passed": false
+  },
+  "observedFailure": "Both persistent-context launches rejected before service-worker or fixture access. Driver retained only the first 1600 characters of launch errors, which end in launch arguments and omit the precise cause. Installed-extension journeys did not pass; C01 was unrun.",
+  "proofLimits": "Command groups were absent and source/Git guards matched, but context closure was not acknowledged; both owned profile directories and runner scratch were intentionally retained. Do not claim verified cleanup of that residue.",
+  "repair": "Retain bounded error head/tail and full error identity; do not guess a product/browser fix. Avoid repeating B02 when B01 has no returned browser context."
+}
