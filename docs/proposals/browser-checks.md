@@ -37,7 +37,7 @@ Then the configured actual OS shortcut invokes the action.
 The genuine action popup may be a Chrome `other` target, omitted from Playwright's
 page inventory. The capture-only driver may focus its own authored fixture window
 and control an exact-URL observed popup using the documented CDP Target bridge:
-DOM readiness/warning/bounds reads and trusted Input press/release clicks only.
+DOM readiness/warning/bounds reads and trusted Input clicks/bounded wheel scrolling.
 It never evaluates Chrome permission/start APIs, sets a Runtime userGesture flag
 or invokes private application state. The OS shortcut remains the entry point.
 Unobserved popups remain failures with bounded target/context diagnostics.

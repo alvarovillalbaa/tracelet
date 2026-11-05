@@ -222,11 +222,11 @@ async function cdpPopup(target) {
   function targetDetached(event) { if (event.sessionId === sessionId) rejectPending('The actual popup target detached during an operation.'); }
   browserCDP.on('Target.receivedMessageFromTarget', receive);
   browserCDP.on('Target.detachedFromTarget', targetDetached);
-  function command(method, params = {}) {
+  function command(method, params = {}, milliseconds = 5000) {
     assert(!detached, 'The actual popup protocol session is no longer attached.');
     return new Promise((resolve, reject) => {
       const id = ++nextId;
-      const timer = setTimeout(() => { pending.delete(id); reject(new Error(`Popup protocol ${method} exceeded five seconds.`)); }, 5000);
+      const timer = setTimeout(() => { pending.delete(id); reject(new Error(`Popup protocol ${method} exceeded its bounded deadline.`)); }, Math.max(1, Math.min(5000, milliseconds)));
       pending.set(id, { resolve, reject, timer, method });
       browserCDP.send('Target.sendMessageToTarget', { sessionId, message: JSON.stringify({ id, method, params }) }).catch(error => {
         const item = pending.get(id); if (!item) return;
@@ -234,8 +234,8 @@ async function cdpPopup(target) {
       });
     });
   }
-  async function read(expression) {
-    const result = await command('Runtime.evaluate', { expression, returnByValue: true });
+  async function read(expression, milliseconds = 5000) {
+    const result = await command('Runtime.evaluate', { expression, returnByValue: true }, milliseconds);
     assert(!result.exceptionDetails, 'Reading the actual popup DOM failed.');
     return result.result?.value;
   }
@@ -244,18 +244,50 @@ async function cdpPopup(target) {
     async readSite() { return read(`location.href === ${JSON.stringify(target.url)} ? document.querySelector('#current-site')?.textContent?.slice(0,4096) : null`); },
     async click(selector) {
       assert(['#start', '#stop', '#bind'].includes(selector));
-      const point = await until(() => read(`(() => {
-        if(location.href !== ${JSON.stringify(target.url)}) return null;
-        const button = document.querySelector(${JSON.stringify(selector)});
-        if(!button || button.tagName !== 'BUTTON' || button.disabled || button.hidden) return null;
-        const rect = button.getBoundingClientRect(), style = getComputedStyle(button);
-        if(rect.width <= 0 || rect.height <= 0 || style.display === 'none' || style.visibility === 'hidden') return null;
-        const x = rect.left + rect.width/2, y = rect.top + rect.height/2;
-        const hit = document.elementFromPoint(x,y);
-        return hit === button || button.contains(hit) ? {x,y} : null;
-      })()`), value => value && Number.isFinite(value.x) && Number.isFinite(value.y), 'The actual popup control did not become visible and enabled.', 5000);
-      await command('Input.dispatchMouseEvent', { type: 'mousePressed', x: point.x, y: point.y, button: 'left', buttons: 1, clickCount: 1 });
-      await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: point.x, y: point.y, button: 'left', buttons: 0, clickCount: 1 });
+      const readyEnd = Math.min(end, Date.now() + 5000);
+      const remaining = () => { const time = readyEnd - Date.now(); assert(time > 0, 'The actual popup control did not become visible and enabled.'); return time; };
+      let point, wheels = 0, wheelRect;
+      while (Date.now() < readyEnd) {
+        alive();
+        const state = await read(`(() => {
+          const button = location.href === ${JSON.stringify(target.url)} ? document.querySelector(${JSON.stringify(selector)}) : null;
+          const viewport = {width:innerWidth,height:innerHeight};
+          const statusText = (document.querySelector('#popup-status')?.textContent || '').slice(0,240);
+          if(!button || button.tagName !== 'BUTTON') return {selector:${JSON.stringify(selector)},found:false,disabled:null,hidden:null,rect:null,viewport,hit:false,statusText};
+          const box = button.getBoundingClientRect(), style = getComputedStyle(button);
+          const rect = {left:box.left,top:box.top,width:box.width,height:box.height};
+          const hit = document.elementFromPoint(box.left+box.width/2,box.top+box.height/2);
+          return {selector:${JSON.stringify(selector)},found:true,disabled:button.disabled,hidden:button.hidden || style.display === 'none' || style.visibility === 'hidden',rect,viewport,hit:hit === button || button.contains(hit),statusText};
+        })()`, remaining());
+        assert(state && state.selector === selector && typeof state.found === 'boolean', 'Popup readiness DOM state was invalid.');
+        for (const value of Object.values(state.viewport)) assert(Number.isFinite(value) && value > 0 && value <= 10_000, 'Popup viewport was invalid.');
+        if (state.rect) for (const value of Object.values(state.rect)) assert(Number.isFinite(value) && Math.abs(value) <= 1_000_000, 'Popup control bounds were invalid.');
+        state.statusText = clean(state.statusText).slice(0, 240);
+        const observations = report.observations.popupReadiness ??= [];
+        const index = observations.findIndex(row => row.selector === selector);
+        const diagnostic = { ...state, scrollEvents: wheels };
+        if (index >= 0) observations[index] = diagnostic;
+        else { assert(observations.length < 3); observations.push(diagnostic); }
+        if (state.found && !state.disabled && !state.hidden && state.rect.width > 0 && state.rect.height > 0) {
+          const { rect, viewport } = state;
+          const x = rect.left + rect.width / 2, y = rect.top + rect.height / 2;
+          const outside = rect.left < 0 || rect.top < 0 || rect.left + rect.width > viewport.width || rect.top + rect.height > viewport.height;
+          const moved = !wheelRect || rect.left !== wheelRect.left || rect.top !== wheelRect.top;
+          if (outside && wheels < 3 && moved) {
+            await command('Input.dispatchMouseEvent', { type: 'mouseWheel', x: viewport.width / 2, y: viewport.height / 2,
+              button: 'none', buttons: 0, deltaX: Math.max(-600, Math.min(600, x - viewport.width / 2)),
+              deltaY: Math.max(-600, Math.min(600, y - viewport.height / 2)) }, remaining());
+            wheels++; wheelRect = { ...rect }; diagnostic.scrollEvents = wheels;
+            continue;
+          }
+          if (x >= 0 && y >= 0 && x < viewport.width && y < viewport.height && state.hit) { point = { x, y }; break; }
+        }
+        await new Promise(resolve => setTimeout(resolve, Math.min(50, remaining())));
+      }
+      assert(point, 'The actual popup control did not become visible and enabled.');
+      await command('Input.dispatchMouseEvent', { type: 'mousePressed', x: point.x, y: point.y, button: 'left', buttons: 1, clickCount: 1 }, remaining());
+      await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: point.x, y: point.y, button: 'left', buttons: 0, clickCount: 1 }, remaining());
+      remaining();
     },
     async isClosed() { return !(await popupTargets()).some(item => item.targetId === target.targetId); },
     async dispose() {
