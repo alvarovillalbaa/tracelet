@@ -1,0 +1,67 @@
+{
+  "kind": "tracelet-developer-prerelease",
+  "windowUTC": [
+    "2026-11-05T07:36:11Z",
+    "2026-11-05T07:38:35Z"
+  ],
+  "repository": "alvarovillalbaa/tracelet",
+  "tag": "v0.1.0",
+  "target": "198ead2989288b4c6a2551bbce263aa0419915f0",
+  "releaseId": 434899427,
+  "url": "https://github.com/alvarovillalbaa/tracelet/releases/tag/v0.1.0",
+  "prerelease": true,
+  "assets": [
+    {
+      "browser_download_url": "https://github.com/alvarovillalbaa/tracelet/releases/download/v0.1.0/integrity.json",
+      "digest": "sha256:e74989f754817c126aa3234b2b1e52ee5d5b8ca77a14ea4c5a4c5896e68af9db",
+      "id": 712510261,
+      "name": "integrity.json",
+      "size": 2197,
+      "state": "uploaded"
+    },
+    {
+      "browser_download_url": "https://github.com/alvarovillalbaa/tracelet/releases/download/v0.1.0/tracelet-0.1.0.zip",
+      "digest": "sha256:992bf5e22d0da491bda85b05d298781bd3fa1c1a08b0eada8cbf116defde7e89",
+      "id": 712509781,
+      "name": "tracelet-0.1.0.zip",
+      "size": 82852,
+      "state": "uploaded"
+    }
+  ],
+  "anonymousHTTP": {
+    "allFour200": true,
+    "sourceExact": true,
+    "files": {
+      "releaseZip": {
+        "bytes": 82852,
+        "sha256": "992bf5e22d0da491bda85b05d298781bd3fa1c1a08b0eada8cbf116defde7e89"
+      },
+      "releaseIntegrity": {
+        "bytes": 2197,
+        "sha256": "e74989f754817c126aa3234b2b1e52ee5d5b8ca77a14ea4c5a4c5896e68af9db"
+      },
+      "liveIndex": {
+        "bytes": 3609,
+        "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+      },
+      "liveZip": {
+        "bytes": 82852,
+        "sha256": "992bf5e22d0da491bda85b05d298781bd3fa1c1a08b0eada8cbf116defde7e89"
+      }
+    }
+  },
+  "production": {
+    "deployment": "dpl_EnJyQMMuz82LA7bLXYm3pcXUNbkZ",
+    "state": "READY",
+    "source": "198ead2989288b4c6a2551bbce263aa0419915f0",
+    "canonical": "https://tracelet-three.vercel.app",
+    "observedUTC": "2026-11-05T07:36:42Z"
+  },
+  "operations": "The generic gh release command could not connect; a read confirmed no release existed. Authenticated gh api created the release and uploaded both assets; server digests and anonymous downloads were verified. No credential was printed.",
+  "edition": "This is an additive documentation-only record after the pinned release target. The release target, binary and observed production source above are not relabeled as this file's own follow-up commit.",
+  "limits": [
+    "Load-unpacked developer distribution, not Chrome Web Store or signed/auto-update proof.",
+    "The licensed package adds only MIT LICENSE to the twelve accepted extension files; C01's earlier twelve-file ZIP stays distinct.",
+    "31 Node, B01/B02 and C01 remain separate closed invocations. Full portfolio goal stays active."
+  ]
+}
