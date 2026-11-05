@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "116",
+  "name": "Tracelet — recording to tasks",
+  "version": "0.1.0",
+  "description": "Record a tab, review its actions and replay one approved step at a time. Saved on this device.",
+  "permissions": ["activeTab", "scripting", "tabCapture", "offscreen", "storage"],
+  "background": { "service_worker": "worker.mjs", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "Tracelet" },
+  "commands": {
+    "_execute_action": { "suggested_key": { "default": "Alt+Shift+R" } }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; img-src 'self' data:; media-src 'self' blob:; style-src 'self'; base-uri 'none'; form-action 'none'; frame-src 'none'"
+  }
+}

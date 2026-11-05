@@ -1,0 +1,378 @@
+{
+  "kind": "tracelet-local-checks",
+  "command": [
+    "node",
+    "--experimental-vm-modules",
+    "--test",
+    "tests/recording.test.mjs",
+    "tests/workflow.test.mjs"
+  ],
+  "node": "v26.8.2",
+  "nodeSHA256": "902b6a6984d5d825829ea9064ab73b734548df37bc0683990dca31c8dc2a9253",
+  "sourceBefore": [
+    {
+      "path": ".gitignore",
+      "mode": 420,
+      "bytes": 95,
+      "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": 420,
+      "bytes": 1801,
+      "sha256": "59a8d1ada9153b7e284541e022de5e9d462523a88f1442d590eef2c4ad589f2f"
+    },
+    {
+      "path": "LICENSE",
+      "mode": 420,
+      "bytes": 1072,
+      "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+    },
+    {
+      "path": "README.md",
+      "mode": 420,
+      "bytes": 3189,
+      "sha256": "6a16c1b0607bad7e200a661ce9e8ddb9942ac016888683e315309009c1a7645e"
+    },
+    {
+      "path": "docs/architecture.md",
+      "mode": 420,
+      "bytes": 3503,
+      "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+    },
+    {
+      "path": "docs/proposals/focused-checks.md",
+      "mode": 420,
+      "bytes": 3185,
+      "sha256": "359d8edae7daad4df5f44b021f4ae3910313684adab536e274949278dd605411"
+    },
+    {
+      "path": "docs/spec.md",
+      "mode": 420,
+      "bytes": 4157,
+      "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+    },
+    {
+      "path": "extension/content.js",
+      "mode": 420,
+      "bytes": 11671,
+      "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+    },
+    {
+      "path": "extension/lib/db.mjs",
+      "mode": 420,
+      "bytes": 7012,
+      "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+    },
+    {
+      "path": "extension/lib/workflow.mjs",
+      "mode": 420,
+      "bytes": 6734,
+      "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+    },
+    {
+      "path": "extension/manifest.json",
+      "mode": 420,
+      "bytes": 711,
+      "sha256": "ee70edc17e588abc93b1d7490767d597f76a9b01deeca593852b6beafa6d7517"
+    },
+    {
+      "path": "extension/offscreen.html",
+      "mode": 420,
+      "bytes": 173,
+      "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+    },
+    {
+      "path": "extension/offscreen.mjs",
+      "mode": 420,
+      "bytes": 3967,
+      "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+    },
+    {
+      "path": "extension/popup.html",
+      "mode": 420,
+      "bytes": 2127,
+      "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+    },
+    {
+      "path": "extension/popup.mjs",
+      "mode": 420,
+      "bytes": 2255,
+      "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+    },
+    {
+      "path": "extension/ui.css",
+      "mode": 420,
+      "bytes": 11316,
+      "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+    },
+    {
+      "path": "extension/worker.mjs",
+      "mode": 420,
+      "bytes": 11567,
+      "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+    },
+    {
+      "path": "extension/workspace.html",
+      "mode": 420,
+      "bytes": 5127,
+      "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+    },
+    {
+      "path": "extension/workspace.mjs",
+      "mode": 420,
+      "bytes": 17492,
+      "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+    },
+    {
+      "path": "package.json",
+      "mode": 420,
+      "bytes": 394,
+      "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+    },
+    {
+      "path": "scripts/check.mjs",
+      "mode": 420,
+      "bytes": 7975,
+      "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+    },
+    {
+      "path": "scripts/local-checks.py",
+      "mode": 420,
+      "bytes": 4842,
+      "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+    },
+    {
+      "path": "scripts/package.mjs",
+      "mode": 420,
+      "bytes": 4595,
+      "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+    },
+    {
+      "path": "site/icon.svg",
+      "mode": 420,
+      "bytes": 173,
+      "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+    },
+    {
+      "path": "site/index.html",
+      "mode": 420,
+      "bytes": 3609,
+      "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+    },
+    {
+      "path": "site/style.css",
+      "mode": 420,
+      "bytes": 4244,
+      "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+    },
+    {
+      "path": "tests/recording.test.mjs",
+      "mode": 420,
+      "bytes": 10828,
+      "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+    },
+    {
+      "path": "tests/workflow.test.mjs",
+      "mode": 420,
+      "bytes": 11362,
+      "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+    },
+    {
+      "path": "vercel.json",
+      "mode": 420,
+      "bytes": 597,
+      "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+    }
+  ],
+  "startedAtUTC": "2026-11-05T06:04:52Z",
+  "stdout": "(node:95919) ExperimentalWarning: VM Modules is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)\n✔ final video data is committed before completed metadata and the stop reply (16.979542ms)\n✔ a refused video write preserves committed chunks and finalizes as partial with no live track (2.587875ms)\n✔ foreign extension and tab senders cannot start or stop the offscreen recorder (0.916375ms)\n✔ a second start is refused while the first media acquisition is still pending (2.364458ms)\n✔ unsupported encoding releases an acquired stream without inventing completed metadata (0.881667ms)\n✔ repeated stop requests share finalization and cannot duplicate its terminal receipt (1.211333ms)\n✔ a workflow JSON round trip preserves the ordered non-executable checklist (8.810375ms)\n✔ session processing projects workflow data without recovery or video metadata (0.500208ms)\n✔ validation leaves caller-owned objects unchanged and returns detached data (0.493917ms)\n✔ imports reject primitive and non-plain containers (1.291042ms)\n✔ unknown keys and recorded values are rejected at every workflow boundary (0.215417ms)\n✔ format and version never silently accept a foreign executable schema (0.08375ms)\n✔ missing required workflow and step keys are rejected (0.195833ms)\n✔ duplicate step identities cannot become two replay approvals (0.145458ms)\n✔ timestamps reject backward order and non-finite fractional or out-of-range values (0.241ms)\n✔ equal timestamps and the exact five-minute endpoint retain event order (0.260542ms)\n✔ the five-hundred-step boundary is accepted while the next step is refused (1.902834ms)\n✔ title label note selector and identity caps are enforced without truncation (1.839458ms)\n✔ multiline notes remain text while control characters cannot enter identity fields (0.139167ms)\n✔ unpaired Unicode surrogates are rejected instead of silently changing exported data (0.131958ms)\n✔ target records are exact data and manual steps can omit an executable target (0.155417ms)\n✔ field tasks exclude credential hidden file and submit-like controls (0.150875ms)\n✔ imported sources must already be canonical and cannot hide a query or fragment (0.099541ms)\n✔ recording a source strips private URL query and fragment values (0.049625ms)\n✔ source capture refuses credentials and non-web protocols (0.307208ms)\n✔ Markdown renders hostile HTML and link syntax as text without private session data (0.358083ms)\n✔ analysis counts event kinds and reports the recorded stopped duration (0.088625ms)\n✔ recording finalization retains observed duration beyond the bounded action timeline (0.075334ms)\n✔ active or interrupted analysis uses the last recorded event without a running clock (0.149291ms)\n✔ an empty checklist remains a valid reviewable workflow rather than an automatic action (0.076292ms)\n✔ prototype keys and accessor input are refused without invoking supplied code (0.144583ms)\nℹ tests 31\nℹ suites 0\nℹ pass 31\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 95.337583\n",
+  "stderr": "",
+  "exitCode": 0,
+  "failure": null,
+  "completeEOF": true,
+  "processGroupGone": true,
+  "sourceAfter": [
+    {
+      "path": ".gitignore",
+      "mode": 420,
+      "bytes": 95,
+      "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": 420,
+      "bytes": 1801,
+      "sha256": "59a8d1ada9153b7e284541e022de5e9d462523a88f1442d590eef2c4ad589f2f"
+    },
+    {
+      "path": "LICENSE",
+      "mode": 420,
+      "bytes": 1072,
+      "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+    },
+    {
+      "path": "README.md",
+      "mode": 420,
+      "bytes": 3189,
+      "sha256": "6a16c1b0607bad7e200a661ce9e8ddb9942ac016888683e315309009c1a7645e"
+    },
+    {
+      "path": "docs/architecture.md",
+      "mode": 420,
+      "bytes": 3503,
+      "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+    },
+    {
+      "path": "docs/proposals/focused-checks.md",
+      "mode": 420,
+      "bytes": 3185,
+      "sha256": "359d8edae7daad4df5f44b021f4ae3910313684adab536e274949278dd605411"
+    },
+    {
+      "path": "docs/spec.md",
+      "mode": 420,
+      "bytes": 4157,
+      "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+    },
+    {
+      "path": "extension/content.js",
+      "mode": 420,
+      "bytes": 11671,
+      "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+    },
+    {
+      "path": "extension/lib/db.mjs",
+      "mode": 420,
+      "bytes": 7012,
+      "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+    },
+    {
+      "path": "extension/lib/workflow.mjs",
+      "mode": 420,
+      "bytes": 6734,
+      "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+    },
+    {
+      "path": "extension/manifest.json",
+      "mode": 420,
+      "bytes": 711,
+      "sha256": "ee70edc17e588abc93b1d7490767d597f76a9b01deeca593852b6beafa6d7517"
+    },
+    {
+      "path": "extension/offscreen.html",
+      "mode": 420,
+      "bytes": 173,
+      "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+    },
+    {
+      "path": "extension/offscreen.mjs",
+      "mode": 420,
+      "bytes": 3967,
+      "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+    },
+    {
+      "path": "extension/popup.html",
+      "mode": 420,
+      "bytes": 2127,
+      "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+    },
+    {
+      "path": "extension/popup.mjs",
+      "mode": 420,
+      "bytes": 2255,
+      "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+    },
+    {
+      "path": "extension/ui.css",
+      "mode": 420,
+      "bytes": 11316,
+      "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+    },
+    {
+      "path": "extension/worker.mjs",
+      "mode": 420,
+      "bytes": 11567,
+      "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+    },
+    {
+      "path": "extension/workspace.html",
+      "mode": 420,
+      "bytes": 5127,
+      "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+    },
+    {
+      "path": "extension/workspace.mjs",
+      "mode": 420,
+      "bytes": 17492,
+      "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+    },
+    {
+      "path": "package.json",
+      "mode": 420,
+      "bytes": 394,
+      "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+    },
+    {
+      "path": "scripts/check.mjs",
+      "mode": 420,
+      "bytes": 7975,
+      "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+    },
+    {
+      "path": "scripts/local-checks.py",
+      "mode": 420,
+      "bytes": 4842,
+      "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+    },
+    {
+      "path": "scripts/package.mjs",
+      "mode": 420,
+      "bytes": 4595,
+      "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+    },
+    {
+      "path": "site/icon.svg",
+      "mode": 420,
+      "bytes": 173,
+      "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+    },
+    {
+      "path": "site/index.html",
+      "mode": 420,
+      "bytes": 3609,
+      "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+    },
+    {
+      "path": "site/style.css",
+      "mode": 420,
+      "bytes": 4244,
+      "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+    },
+    {
+      "path": "tests/recording.test.mjs",
+      "mode": 420,
+      "bytes": 10828,
+      "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+    },
+    {
+      "path": "tests/workflow.test.mjs",
+      "mode": 420,
+      "bytes": 11362,
+      "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+    },
+    {
+      "path": "vercel.json",
+      "mode": 420,
+      "bytes": 597,
+      "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+    }
+  ],
+  "sourceUnchanged": true,
+  "scratchRemoved": true,
+  "finishedAtUTC": "2026-11-05T06:04:52Z",
+  "publicationRedaction": {
+    "reason": "Machine-local executable path omitted; version/binary SHA and all stdout/stderr/source guards retained.",
+    "rawReceiptSHA256": "583721c8d88496e2e778105efb21c80bbadc62f892ed5bebbbb8e9a64b123f19"
+  }
+}

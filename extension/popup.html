@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tracelet</title>
+  <link rel="stylesheet" href="ui.css">
+  <script type="module" src="popup.mjs"></script>
+</head>
+<body class="popup">
+  <main class="popup-card">
+    <header class="brand-row"><a class="brand" id="library-brand" href="workspace.html" target="_blank"><span class="brand-mark" aria-hidden="true">↗</span>tracelet<span class="brand-dot">.</span></a><span class="small-tag">ON THIS DEVICE</span></header>
+    <p class="eyebrow">FROM A MOMENT TO A METHOD</p>
+    <h1>Show the steps.<br>Keep the know-how.</h1>
+    <p class="muted">Record this tab, review its actions, then run one approved step at a time.</p>
+    <div class="site-card"><span class="site-icon" aria-hidden="true">↗</span><div><small>CURRENT TAB</small><p id="current-site">Reading the current tab…</p></div></div>
+    <div class="privacy-note"><strong>Visible content becomes part of the video.</strong><p>Close private content before recording. Video is not redacted. Only this tab is recorded, without sound or microphone. Recordings stay on this device.</p></div>
+    <section id="active-recording" class="recording-banner" hidden><span class="record-dot" aria-hidden="true"></span><div><strong>Recording in progress</strong><p id="recording-time">Stop when you have the steps you need.</p></div></section>
+    <p id="popup-status" class="notice" role="status" aria-live="polite" hidden></p>
+    <button id="start" class="button primary wide" type="button" disabled><span aria-hidden="true">●</span>Start recording</button>
+    <button id="stop" class="button danger wide" type="button" hidden>Stop &amp; review</button>
+    <button id="bind" class="button secondary wide" type="button" disabled>Use this tab for tasks <span aria-hidden="true">↗</span></button>
+    <footer class="popup-footer"><a id="library" href="workspace.html" target="_blank">Open your library <span aria-hidden="true">→</span></a><small>5 min maximum · no cloud upload</small></footer>
+  </main>
+</body>
+</html>

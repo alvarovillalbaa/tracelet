@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your library · Tracelet</title>
+  <link rel="stylesheet" href="ui.css">
+  <script type="module" src="workspace.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#review">Skip to review</a>
+  <div class="workspace-shell">
+    <aside class="library-sidebar" aria-label="Your library">
+      <a class="brand" href="workspace.html"><span class="brand-mark" aria-hidden="true">↗</span>tracelet<span class="brand-dot">.</span></a>
+      <div class="library-heading"><div><p class="eyebrow">A LITTLE LESS REPEATING</p><h1>Your library</h1></div><button id="refresh" class="icon-button" type="button" aria-label="Refresh library">↻</button></div>
+      <button id="import" class="button secondary wide" type="button">Import a workflow <span aria-hidden="true">↑</span></button>
+      <input id="import-file" type="file" accept=".json,application/json" hidden aria-label="Choose workflow JSON">
+      <p class="small muted">Workflow JSON · up to 4 MiB</p>
+      <div id="library-list" class="library-list" aria-live="polite"><p class="muted">Loading your library…</p></div>
+      <p class="library-foot">Local recordings. Deliberate actions.<br>Nothing is uploaded to a server.</p>
+    </aside>
+    <main id="review" class="review" tabindex="-1">
+      <header class="workspace-top"><span class="small-tag">YOUR DEVICE, YOUR WORK</span><div id="active-banner" class="active-inline" hidden><span class="record-dot" aria-hidden="true"></span><span>Recording</span><button id="stop-recording" class="button danger small-button" type="button">Stop &amp; review</button></div></header>
+      <p id="status" class="notice" role="status" aria-live="polite" hidden></p>
+      <section id="empty" class="empty-state"><span class="empty-mark" aria-hidden="true">↗</span><p class="eyebrow">MAKE IT REPEATABLE</p><h2>Keep a useful<br>way of doing things.</h2><p>Open a website, click Tracelet in the toolbar, and start recording. Your video and reviewed steps will appear here.</p><p class="small muted">Visible private content is included in video. Record only what you mean to keep.</p></section>
+      <section id="editor" hidden aria-label="Recording and task review">
+        <div class="review-heading"><div><p id="session-kind" class="eyebrow"></p><h2 id="review-title"></h2><p id="source" class="source-line"></p></div><button id="delete" class="button text-danger" type="button">Delete</button></div>
+        <p id="partial-note" class="inline-warning" hidden></p>
+        <div class="edit-toolbar"><label class="title-field">Name<input id="session-title" maxlength="120" autocomplete="off" required></label><div class="save-actions"><span id="save-state" class="small muted">Saved on this device</span><button id="discard" class="button secondary" type="button" disabled>Discard edits</button><button id="save" class="button primary" type="button" disabled>Save changes</button></div></div>
+        <div id="summary" class="summary-grid" aria-label="Action summary"></div>
+        <section id="video-section" class="video-panel" hidden aria-label="Recorded video"><video id="video" controls preload="metadata" playsinline></video><div><span class="small muted">Original video · visible content is not redacted</span><button id="download-video" class="button secondary small-button" type="button">Download video</button></div></section>
+        <div class="export-bar"><p class="small muted">Tasks come from captured browser actions, not AI analysis of the video.</p><div><button id="export-json" class="button secondary small-button" type="button">Workflow JSON ↓</button><button id="export-markdown" class="button secondary small-button" type="button">Markdown tasks ↓</button></div></div>
+        <section class="replay-context" aria-label="Selected replay page"><div><p class="eyebrow">ONE STEP AT A TIME</p><strong id="binding-title">Choose a site tab</strong><p id="binding-description">Open the matching website, click Tracelet in its toolbar, then choose “Use this tab for tasks”.</p></div><span id="binding-state" class="small-tag">NO TAB SELECTED</span></section>
+        <div class="steps-heading"><h3>Review the steps</h3><span id="step-count" class="small muted"></span></div>
+        <p id="replay-note" class="small muted">Each Run button approves one action on the selected page. Check the result there before continuing. Tracelet cannot guarantee a third-party transaction is safe.</p>
+        <ol id="steps" class="steps-list"></ol>
+        <form id="manual-form" class="manual-form"><div><h3>Add a manual step</h3><p class="small muted">Describe something you will do yourself.</p></div><label>Step label<input id="manual-label" maxlength="160" required placeholder="Review the result"></label><label>Notes<textarea id="manual-note" maxlength="1000" rows="2" placeholder="What should someone check?"></textarea></label><button class="button secondary" type="submit">Add step</button></form>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

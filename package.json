@@ -1,0 +1,14 @@
+{
+  "name": "tracelet",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local tab recording, task review and deliberate browser replay.",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "node --experimental-vm-modules --test tests/*.test.mjs",
+    "package": "node scripts/package.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "license": "MIT"
+}
