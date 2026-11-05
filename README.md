@@ -20,8 +20,9 @@ remains separate; it is not implied by the protocol adapters or workspace checks
 Chrome 116 or later. Download the extension archive from the project site,
 unzip it, open `chrome://extensions`, enable **Developer mode**, choose
 **Load unpacked** and select the extracted `tracelet` folder. Pin Tracelet
-in the toolbar (or press **Alt+Shift+R**). This is a developer installation,
-not a Chrome Web Store release.
+in the toolbar. If Chrome assigns the suggested **Alt+Shift+R** shortcut, you
+can use that too; manage or assign it at `chrome://extensions/shortcuts`.
+This is a developer installation, not a Chrome Web Store release.
 
 1. Open a website, click Tracelet and choose **Record this tab**. Visible page
    content is recorded: close private information first. No microphone/audio.

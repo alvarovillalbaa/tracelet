@@ -22,7 +22,7 @@ const report = { case: 'C01', status: 'failed', stage: 'preflight', observations
 ] };
 const end = Date.now() + 90_000;
 let context, contextClosing, server, owned, ownedHandle, ownedIdentity, scratchHandle, scratchIdentity;
-let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin, processBaseline, browserCDP;
+let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin, processBaseline, browserCDP, shortcutsUIOpen = false, configuredShortcutOS;
 const popupAdapters = new Set();
 const hash = value => createHash('sha256').update(value).digest('hex');
 function clean(error) {
@@ -155,6 +155,40 @@ async function newExtensionPage(filename, previous = new Set()) {
     && page.url().split('?')[0].split('#')[0] === `${extensionOrigin}/${filename}`), Boolean,
   `The genuine extension ${filename} page was not exposed by Chromium.`, 10_000);
 }
+async function configureShortcut(worker, extensionId) {
+  const readShortcut = () => worker.evaluate(async () => {
+    const actions = (await chrome.commands.getAll()).filter(command => command.name === '_execute_action');
+    if (actions.length !== 1) throw new Error('The installed action command was not unique.');
+    return String(actions[0].shortcut ?? '');
+  });
+  const defaultShortcut = await readShortcut();
+  const observation = report.observations.shortcutConfiguration = { command: '_execute_action', defaultShortcut,
+    assignedShortcut: null, configuredVia: null, actionCardObserved: false, actionRowObserved: false };
+  const manager = await context.newPage();
+  shortcutsUIOpen = true;
+  try {
+    await manager.goto('chrome://extensions/shortcuts');
+    const cards = manager.locator('extensions-keyboard-shortcuts .shortcut-card').filter({ hasText: 'Tracelet — recording to tasks' });
+    await cards.getByRole('heading', { name: 'Tracelet — recording to tasks', exact: true }).waitFor({ state: 'visible' });
+    assert.equal(await cards.count(), 1, 'The owned Tracelet shortcut card was not unique.');
+    observation.actionCardObserved = true;
+    const entry = cards.locator(`.command-entry:has(select[data-extension-id="${extensionId}"][data-command-name="_execute_action"])`);
+    assert.equal(await entry.count(), 1, 'The owned action shortcut row was not unique.');
+    observation.actionRowObserved = true;
+    const shortcut = entry.locator('cr-shortcut-input');
+    await shortcut.locator('cr-icon-button#edit').click();
+    const input = shortcut.locator('cr-input#input input');
+    await until(() => input.isEditable(), Boolean, 'The Chrome shortcut textbox did not become editable.', 5000);
+    await input.press('Alt+Shift+R');
+    const assignedShortcut = await until(readShortcut, value => value.replaceAll(' ', '') === 'Alt+Shift+R', 'Chrome did not confirm the shortcut entered through its normal UI.', 5000);
+    configuredShortcutOS = 'alt+shift+r';
+    observation.assignedShortcut = assignedShortcut;
+    observation.configuredVia = 'Chrome shortcuts UI';
+  } finally {
+    await manager.close();
+    shortcutsUIOpen = false;
+  }
+}
 async function popupTargets() {
   return (await bounded(browserCDP.send('Target.getTargets'), 5000, 'Popup target discovery exceeded five seconds.')).targetInfos;
 }
@@ -236,6 +270,7 @@ async function cdpPopup(target) {
   return adapter;
 }
 async function toolbar(fixture) {
+  assert(configuredShortcutOS, 'The action shortcut must be confirmed through Chrome UI first.');
   await fixture.bringToFront();
   assert.equal(await fixture.title(), 'Authored Tracelet capture');
   const run = promisify(execFile), options = { timeout: 5000, killSignal: 'SIGKILL', maxBuffer: 8192 };
@@ -246,7 +281,7 @@ async function toolbar(fixture) {
   const previous = new Set(context.pages());
   const before = await popupTargets();
   assert(!before.some(target => target.url === `${extensionOrigin}/popup.html`), 'An earlier popup remained open before the OS shortcut.');
-  await run('xdotool', ['key', '--clearmodifiers', 'alt+shift+r'], options);
+  await run('xdotool', ['key', '--clearmodifiers', configuredShortcutOS], options);
   report.observations.hotkeys++;
   let targets = [];
   try {
@@ -348,11 +383,13 @@ async function journey() {
     if (headers.authorization || headers.cookie) { report.observations.credentialRequests++; return route.abort('blockedbyclient'); }
     const extensionRead = url.origin === 'null' && url.protocol === 'chrome-extension:' && url.hostname === workerURL.hostname;
     const fixtureRead = url.origin === fixtureOrigin && ['/task', '/favicon.ico'].includes(url.pathname) && !url.search;
+    const shortcutsUIRead = shortcutsUIOpen && url.protocol === 'chrome:' && ['extensions', 'resources'].includes(url.hostname);
     const localBlob = request.url().startsWith(`blob:${extensionOrigin}/`);
-    if (['GET', 'HEAD'].includes(request.method()) && (extensionRead || fixtureRead || localBlob)) return route.continue();
+    if (['GET', 'HEAD'].includes(request.method()) && (extensionRead || fixtureRead || shortcutsUIRead || localBlob)) return route.continue();
     report.observations.unexpectedRequests++; return route.abort('blockedbyclient');
   });
   await context.routeWebSocket('**/*', socket => { report.observations.unexpectedRequests++; socket.close(); });
+  await stage('configure-action-shortcut-through-chrome-ui', () => configureShortcut(worker, workerURL.hostname));
   const fixture = context.pages()[0] ?? await context.newPage();
   await stage('open-authored-tab', async () => {
     const response = await fixture.goto(`${fixtureOrigin}/task`); assert.equal(response.status(), 200);

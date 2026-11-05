@@ -27,6 +27,13 @@ then explicitly bind the original tab and approve the recorded click/field.
 If the browser action cannot be operated, preserve that failure and its exact
 stage; never relabel the two workspace journeys as capture acceptance.
 
+The disposable profile may initially have no assigned action shortcut. The
+driver configures one through the visible `chrome://extensions/shortcuts` UI
+and confirms it with read-only command metadata. It never calls Chrome's private
+configuration API or edits profile preferences. Only while that manager is open
+are built-in extensions/resources GET/HEAD reads allowed; no external network.
+Then the configured actual OS shortcut invokes the action.
+
 The genuine action popup may be a Chrome `other` target, omitted from Playwright's
 page inventory. The capture-only driver may focus its own authored fixture window
 and control an exact-URL observed popup using the documented CDP Target bridge:
