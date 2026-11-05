@@ -17,12 +17,12 @@ const report = { case: 'C01', status: 'failed', stage: 'preflight', observations
   'One headed Chromium/Xvfb installed-extension journey with OS shortcut invocation and real tabCapture.',
   'Authored loopback tab only; no real user browser, account, microphone, sound or external site.',
   'DOM replay dispatch and fixture outcomes do not establish trusted native input or third-party transaction safety.',
-  'Context-close and bounded same-UID Linux process checks cover positive owned argv/TMPDIR/XDG markers; this is not a global descendant inventory.',
+  'Context-close and bounded same-UID Linux process checks inspect new/reused identities for owned argv/TMPDIR/XDG markers; unchanged prelaunch identities are excluded, not a global descendant inventory.',
   'Linux Chromium does not establish macOS privacy prompts, device behavior, Chrome Web Store distribution or full product acceptance.',
 ] };
 const end = Date.now() + 90_000;
 let context, contextClosing, server, owned, ownedHandle, ownedIdentity, scratchHandle, scratchIdentity;
-let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin;
+let launchAttempted = false, interrupted = false, extensionOrigin, fixtureOrigin, processBaseline;
 const hash = value => createHash('sha256').update(value).digest('hex');
 function clean(error) {
   const text = String(error?.message ?? error).replaceAll(scratch || '\u0000', '[scratch]')
@@ -83,7 +83,23 @@ async function boundedProcRead(filename) {
     return buffer.subarray(0, bytesRead).toString('utf8');
   } finally { await handle.close(); }
 }
-async function ownedProcessScan(directory, deadline) {
+async function snapshotProcessBaseline() {
+  const deadline = Date.now() + 5000, baseline = new Set();
+  const processes = (await fs.readdir('/proc')).filter(name => /^[0-9]+$/u.test(name));
+  assert(processes.length <= 8192, 'Process enumeration exceeded its bound.');
+  for (const pid of processes) {
+    assert(Date.now() < deadline, 'Process baseline inspection exceeded its deadline.');
+    try {
+      if ((await fs.stat('/proc/' + pid)).uid !== process.getuid()) continue;
+      const stat = await boundedProcRead('/proc/' + pid + '/stat');
+      const fields = stat.slice(stat.lastIndexOf(')') + 2).trim().split(/\s+/u);
+      assert(fields.length >= 20 && /^[0-9]+$/u.test(fields[19]), 'Process starttime was not available.');
+      baseline.add(pid + ':' + fields[19]);
+    } catch (error) { if (!['ENOENT', 'ESRCH'].includes(error.code)) throw error; }
+  }
+  return baseline;
+}
+async function ownedProcessScan(directory, deadline, baseline, scanned) {
   const processes = (await fs.readdir('/proc')).filter(name => /^[0-9]+$/u.test(name));
   assert(processes.length <= 8192, 'Process enumeration exceeded its bound.');
   const matches = [];
@@ -95,6 +111,9 @@ async function ownedProcessScan(directory, deadline) {
       const stat = await boundedProcRead('/proc/' + pid + '/stat');
       const fields = stat.slice(stat.lastIndexOf(')') + 2).trim().split(/\s+/u);
       assert(fields.length >= 20 && /^[0-9]+$/u.test(fields[19]), 'Process starttime was not available.');
+      const identity = pid + ':' + fields[19];
+      if (baseline.has(identity)) continue;
+      scanned.add(identity);
       const args = (await boundedProcRead('/proc/' + pid + '/cmdline')).split('\u0000');
       const environment = (await boundedProcRead('/proc/' + pid + '/environ')).split('\u0000');
       const argvMatch = args.some(value => inside(value) || (/^--[a-zA-Z0-9_-]+=/u.test(value) && inside(value.slice(value.indexOf('=') + 1))));
@@ -114,19 +133,21 @@ async function ownedProcessScan(directory, deadline) {
   }
   return matches;
 }
-async function verifyNoOwnedProcesses(directory, cleanup) {
-  const deadline = Date.now() + 5000, observed = new Set();
-  const proof = cleanup.processOwnership = { observedPIDs: 0, remainingPIDs: null, uncertain: false, passed: false };
+async function verifyNoOwnedProcesses(directory, cleanup, baseline) {
+  const deadline = Date.now() + 5000, observed = new Set(), scanned = new Set();
+  const proof = cleanup.processOwnership = { baselinePIDs: baseline?.size ?? null, newPIDsScanned: 0,
+    observedPIDs: 0, remainingPIDs: null, uncertain: false, passed: false };
   try {
+    assert(baseline instanceof Set, 'The prelaunch process baseline was not verified.');
     while (Date.now() < deadline) {
-      const remaining = await bounded(ownedProcessScan(directory, deadline), Math.max(1, deadline - Date.now()), 'Process ownership inspection exceeded its deadline.');
+      const remaining = await bounded(ownedProcessScan(directory, deadline, baseline, scanned), Math.max(1, deadline - Date.now()), 'Process ownership inspection exceeded its deadline.');
       remaining.forEach(value => observed.add(value));
-      proof.observedPIDs = observed.size; proof.remainingPIDs = remaining.length;
+      proof.newPIDsScanned = scanned.size; proof.observedPIDs = observed.size; proof.remainingPIDs = remaining.length;
       if (!remaining.length) { proof.passed = true; return; }
       await new Promise(resolve => setTimeout(resolve, Math.min(100, Math.max(1, deadline - Date.now()))));
     }
     throw new Error('Owned browser processes remained after context close.');
-  } catch (error) { proof.uncertain = true; throw error; }
+  } catch (error) { proof.newPIDsScanned = scanned.size; proof.uncertain = true; throw error; }
 }
 async function newExtensionPage(filename, previous = new Set()) {
   return until(async () => context.pages().find(page => !page.isClosed() && !previous.has(page)
@@ -187,6 +208,8 @@ async function journey() {
   await stage('launch-installed-extension', async () => {
     report.observations.temporaryRootBytes = Buffer.byteLength(dirs.tmp);
     assert(report.observations.temporaryRootBytes + 64 < 108, 'Owned temporary path leaves insufficient room for Chromium socket names.');
+    processBaseline = await bounded(snapshotProcessBaseline(), 5000, 'Process baseline inspection exceeded its deadline.');
+    report.observations.processBaselinePIDs = processBaseline.size;
     launchAttempted = true;
     context = await chromium.launchPersistentContext(dirs.profile, {
       channel: 'chromium', headless: false, acceptDownloads: true, downloadsPath: dirs.downloads,
@@ -342,7 +365,7 @@ finally {
   } else report.cleanup.serverClosed = true;
   try {
     if (owned && journeySettled && report.cleanup.contextClosed && report.cleanup.serverClosed) {
-      await verifyOwned(); await verifyNoOwnedProcesses(owned, report.cleanup); await verifyOwned();
+      await verifyOwned(); await verifyNoOwnedProcesses(owned, report.cleanup, processBaseline); await verifyOwned();
       await fs.rm(owned, { recursive: true });
       await assert.rejects(fs.lstat(owned), error => error.code === 'ENOENT'); report.cleanup.ownedDirectoryRemoved = true;
     } else if (owned) report.cleanup.retainedBecauseCleanupUncertain = true;

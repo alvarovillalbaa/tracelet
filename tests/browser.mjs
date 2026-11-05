@@ -75,7 +75,23 @@ async function boundedProcRead(filename) {
     return buffer.subarray(0, bytesRead).toString('utf8');
   } finally { await handle.close(); }
 }
-async function ownedProcessScan(owned, deadline) {
+async function snapshotProcessBaseline() {
+  const deadline = Date.now() + 5000, baseline = new Set();
+  const processes = (await fs.readdir('/proc')).filter(name => /^[0-9]+$/.test(name));
+  assert(processes.length <= 8192, 'Process enumeration exceeded its bound.');
+  for (const pid of processes) {
+    assert(Date.now() < deadline, 'Process baseline inspection exceeded its deadline.');
+    try {
+      if ((await fs.stat('/proc/' + pid)).uid !== process.getuid()) continue;
+      const stat = await boundedProcRead('/proc/' + pid + '/stat');
+      const fields = stat.slice(stat.lastIndexOf(')') + 2).trim().split(/\s+/);
+      assert(fields.length >= 20 && /^[0-9]+$/.test(fields[19]), 'Process starttime was not available.');
+      baseline.add(pid + ':' + fields[19]);
+    } catch (error) { if (!['ENOENT', 'ESRCH'].includes(error.code)) throw error; }
+  }
+  return baseline;
+}
+async function ownedProcessScan(owned, deadline, baseline, scanned) {
   const processes = (await fs.readdir('/proc')).filter(name => /^[0-9]+$/.test(name));
   assert(processes.length <= 8192, 'Process enumeration exceeded its bound.');
   const matches = [];
@@ -87,6 +103,9 @@ async function ownedProcessScan(owned, deadline) {
       const stat = await boundedProcRead('/proc/' + pid + '/stat');
       const fields = stat.slice(stat.lastIndexOf(')') + 2).trim().split(/\s+/);
       assert(fields.length >= 20 && /^[0-9]+$/.test(fields[19]), 'Process starttime was not available.');
+      const identity = pid + ':' + fields[19];
+      if (baseline.has(identity)) continue;
+      scanned.add(identity);
       const args = (await boundedProcRead('/proc/' + pid + '/cmdline')).split('\u0000');
       const environment = (await boundedProcRead('/proc/' + pid + '/environ')).split('\u0000');
       const argvMatch = args.some(value => inside(value) || (/^--[a-zA-Z0-9_-]+=/.test(value) && inside(value.slice(value.indexOf('=') + 1))));
@@ -108,19 +127,21 @@ async function ownedProcessScan(owned, deadline) {
   }
   return matches;
 }
-async function verifyNoOwnedProcesses(owned, cleanup) {
-  const deadline = Date.now() + 5000, observed = new Set();
-  const proof = cleanup.processOwnership = { observedPIDs: 0, remainingPIDs: null, uncertain: false, passed: false };
+async function verifyNoOwnedProcesses(owned, cleanup, baseline) {
+  const deadline = Date.now() + 5000, observed = new Set(), scanned = new Set();
+  const proof = cleanup.processOwnership = { baselinePIDs: baseline?.size ?? null, newPIDsScanned: 0,
+    observedPIDs: 0, remainingPIDs: null, uncertain: false, passed: false };
   try {
+    assert(baseline instanceof Set, 'The prelaunch process baseline was not verified.');
     while (Date.now() < deadline) {
-      const remaining = await bounded(ownedProcessScan(owned, deadline), Math.max(1, deadline - Date.now()), 'Process ownership inspection exceeded its deadline.');
+      const remaining = await bounded(ownedProcessScan(owned, deadline, baseline, scanned), Math.max(1, deadline - Date.now()), 'Process ownership inspection exceeded its deadline.');
       remaining.forEach(value => observed.add(value));
-      proof.observedPIDs = observed.size; proof.remainingPIDs = remaining.length;
+      proof.newPIDsScanned = scanned.size; proof.observedPIDs = observed.size; proof.remainingPIDs = remaining.length;
       if (!remaining.length) { proof.passed = true; return; }
       await new Promise(resolve => setTimeout(resolve, Math.min(100, Math.max(1, deadline - Date.now()))));
     }
     throw new Error('Owned browser processes remained after context close.');
-  } catch (error) { proof.uncertain = true; throw error; }
+  } catch (error) { proof.newPIDsScanned = scanned.size; proof.uncertain = true; throw error; }
 }
 async function chooser(page, filename) {
   const [event] = await Promise.all([page.waitForEvent('filechooser'),
@@ -156,7 +177,7 @@ async function journey(chromium, fixtureOrigin, configuration) {
   const handle = await fs.open(owned, constants.O_RDONLY | constants.O_DIRECTORY | constants.O_NOFOLLOW);
   const held = await handle.stat(), original = { dev: held.dev, ino: held.ino };
   const directories = Object.fromEntries(['profile', 'downloads', 'tmp', 'config', 'cache'].map(name => [name, path.join(owned, name)]));
-  let context, launchAttempted = false, closeAcknowledged = false;
+  let context, processBaseline, launchAttempted = false, closeAcknowledged = false;
   try {
     for (const directory of Object.values(directories)) await fs.mkdir(directory, { mode: 0o700 });
     const imported = { format: 'tracelet', version: 1, title: `Imported ${configuration.id} workflow`,
@@ -171,6 +192,8 @@ async function journey(chromium, fixtureOrigin, configuration) {
     await fs.writeFile(invalidFile, '{"format":"tracelet","version":1,', { flag: 'wx', mode: 0o600 });
     item.tmpPathBytes = Buffer.byteLength(directories.tmp);
     assert(item.tmpPathBytes + 64 < 108, 'Owned Chromium temporary path exceeds the conservative Unix socket budget.');
+    processBaseline = await bounded(snapshotProcessBaseline(), 5000, 'The prelaunch process baseline exceeded its deadline.');
+    item.processBaselinePIDs = processBaseline.size;
     launchAttempted = true;
     context = await chromium.launchPersistentContext(directories.profile, {
       channel: 'chromium', headless: true, acceptDownloads: true, downloadsPath: directories.downloads,
@@ -268,7 +291,7 @@ async function journey(chromium, fixtureOrigin, configuration) {
       else if (!launchAttempted) closeAcknowledged = true;
       item.cleanup.contextClosed = closeAcknowledged;
       assert(closeAcknowledged, 'Browser ownership is uncertain; retain its directory.');
-      await verifyNoOwnedProcesses(owned, item.cleanup);
+      await verifyNoOwnedProcesses(owned, item.cleanup, processBaseline);
       await verifyScratch(); assert.deepEqual(await identity(owned), original);
       const current = await handle.stat(); assert(current.dev === original.dev && current.ino === original.ino);
       await fs.rm(owned, { recursive: true });

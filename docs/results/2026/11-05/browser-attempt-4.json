@@ -1,0 +1,587 @@
+{
+  "kind": "tracelet-browser-attempt",
+  "attempt": 4,
+  "runId": 41980841278,
+  "jobId": 127090327878,
+  "runURL": "https://github.com/alvarovillalbaa/tracelet/actions/runs/41980841278",
+  "preparation": "c520bf24784777ca26a96f8b87e0602e1cd6d2e2",
+  "activation": "7696b247b9b7d8245b1f8efdae90ea70fbc16fa3",
+  "conclusion": "functional-journeys-completed-but-cleanup-failed",
+  "controller": {
+    "kind": "tracelet-browser-ci",
+    "startedAtUTC": "2026-11-05T06:30:25Z",
+    "commands": [
+      {
+        "label": "static",
+        "args": [
+          "node",
+          "scripts/check.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:30:25Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 2589,
+          "sha256": "eca0ddadf5fe1c1dd9fec63877a88d2319194fa80358a88c100ca51e7a9dd81c",
+          "zlibBase64": "eJyllk1v2zAMhu/7FYLOrr1hAwZkp1122mk7DsOgyHSsRpYEis4Hiv730alRNLHir54MWXpI8eULm09yb1wpN5JQabBAD5EUGf2ga9D7KDMZVIzAJwhbyOSjOqio0QT6YSxEufn0mV9G7/rl10zW1Nh+9SWT1mtlv3MI+gUVIDh9oT5m0jTBI/Hiz5Os+DxfAk4ELhrvCmu2RbnNm8fuCqRwB8T7eXH0uK+sP152nrME6auKLwjghvCboEk0+NCGNDadtzsBuDzpGDcvawzcunWJR9B7uV+6H4uLQW5R50vYdIZBKiKh0bQMrRamCorqZYSujS3/BfTsw4XJWrQpgCXcq91Axb6eglM1JkIy1zi6lLgnxhizoiaN50D+LUUQmdmiP8ahk8ctMY1e6zDnfFLyafBWvmniRrxpYI10NVEYEloFahHyd4g+J0RK/HncSBPmBEg3Yw6ZbMoc8F5z5rDrm3T3e7SgYjKJkhG0x9K4Xd6t1xhkRoTRPs/gu41V4KEZYq9/rLUFTwdI33eUy/Pieqy5/rH+5QkLva9+msZ0w5D8fXakTpmIvkUNAl+nJqFcKUrQViGUgo2htsYaMrzjnT1/E84LDlW2mkTDDwviZcTKRO+eTDRQGiV6U2UcPFh1Fh6FQjbiAQScQLOfvMvl84f/GJqRKw=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:30:25Z"
+      },
+      {
+        "label": "package",
+        "args": [
+          "node",
+          "scripts/package.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:30:25Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 135,
+          "sha256": "1145859953d6abc32e0fd3662c3d12ae8b4b12486eb8939f7774dbec26048831",
+          "zlibBase64": "eJwVzcEOwiAMgOG7j9HzJKXQAnsbYG1cMo1xu0zju4v3P9//AVs3fdS7wgzHq3bd9Lii8w7de33CBO08dIc5e0k0wX6rxDLaVnLlWBZPzBiX1IOlUJJSjonUFBtSE6whWFduXUxIPFeJ2qWTDfl/HrKn7+UHegQmPA=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:30:25Z"
+      },
+      {
+        "label": "browser-tooling",
+        "args": [
+          "npm",
+          "install",
+          "--prefix",
+          "/tmp/tl-nibp6vbu/tooling",
+          "--no-save",
+          "--ignore-scripts",
+          "--package-lock=false",
+          "--no-audit",
+          "--no-fund",
+          "playwright@1.64.1"
+        ],
+        "startedAtUTC": "2026-11-05T06:30:25Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 24,
+          "sha256": "4aaef3acc3c4b16766abf61c4f4aa2d3bd413e2fe822d3edd6cfa9d7e7334efa",
+          "zlibBase64": "eJzjSkxJSU1RMFIoSEzOTkxPLVbIzFMwLOYCAF4rB3M="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:30:26Z"
+      },
+      {
+        "label": "runtime-identity",
+        "args": [
+          "node",
+          "-e",
+          "const fs=require(\"node:fs\"); const p=JSON.parse(fs.readFileSync(\"/tmp/tl-nibp6vbu/tooling/node_modules/playwright/package.json\",\"utf8\")); if(p.version!==\"1.64.1\")throw Error(\"Unexpected browser tooling version\"); console.log(JSON.stringify({node:process.version,playwright:p.version}));"
+        ],
+        "startedAtUTC": "2026-11-05T06:30:26Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 42,
+          "sha256": "ee2bf8fe8fa6504f0236a977e743876668ba2886aaad72363e334105afcd5519",
+          "zlibBase64": "eJyrVsrLT0lVslIqMzLRMzLUM1DSUSrISawsL8pMzygBihvqmZnoGSrVcgEABIQLlw=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:30:26Z"
+      },
+      {
+        "label": "chromium-install",
+        "args": [
+          "node",
+          "/tmp/tl-nibp6vbu/tooling/node_modules/playwright/cli.js",
+          "install",
+          "--with-deps",
+          "chromium"
+        ],
+        "startedAtUTC": "2026-11-05T06:30:26Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 16112,
+          "sha256": "9d486ea5c90e84013c0078ad267e661656f2ff133b550b6cc612815c435610e8",
+          "zlibBase64": "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"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:31:30Z"
+      },
+      {
+        "label": "native-input-tooling",
+        "args": [
+          "sudo",
+          "apt-get",
+          "install",
+          "-y",
+          "xdotool"
+        ],
+        "startedAtUTC": "2026-11-05T06:31:30Z",
+        "completeEOF": true,
+        "exitCode": 0,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 1928,
+          "sha256": "fe1e08c5ef4d08c649893de7e4d37f83b1afd1125ddde95744c2433fd6ce80df",
+          "zlibBase64": "eJyllUtv1DAQx++R9jvMpWorNc5zn5yoBJyoUAFxqFDlxLO7VrN25EcffHpsJ7sFVLcFDruKM/75P5N5+BIp42IDPW1v6Aah49poQkhybnkXLAx7FAxF+wBGIXrb5QhpQw0CF2updtRwKbzxyxZhLbtO3vktlDHuLbTbS2i4410HjQfdAV2HbJWAE27umaz+wC/efXsdB+7PSNklOdh+oyhDdgYlCLzrHh6BM8jBSFC4k7cIVDAo5yCkOTAkuUBkfs8GDcxqsoCbc5BroKrd8lvUJHm7NqjAbLkG2aMKcTup/LDzMWLG9Q1o5z8efLfai3xAsypgzTtcZWjajPbG/9IdV0oqTcy9gY/h2ecDroq6hvPvAStha0y/yjL6wyoko1/ENlYYS1q5y4ZHF1bTYWaFsyrtgt2xWX34WsOqWFWkzItZvsinpEinjc95AVdlSUoXzSBY/ZfgmJYXBOuSzILge/c1ti4B+y/PBeQaTsqqcqtMnyafscPWhIpVeMul1S6/Vujw2oGPdRwCXQVdMklO9jXLqKENdf65WoXJ06+nRxFDkUctUaaMMmWUqaJMFWXqKFNHmWmUmUaZWZSZRZl5lJlHmUWUWUSZZZRZPpPTeIKK6Xw+9KkO04Jx5cpMKu7WrVUKhfl1vJDTSfJJYU+VP8oNESt8PfqzsrEgr4ujij7VBNdDpTJs/PZJ8jWg/pzfShlOnu6h04F6bXuMbUni/o47/sHffcu/5KkJftr+LwM8YK/T+aRki1qHABXfbNxscveLgh0VKWvcaCFFSfK0DlA5QhfuSmgOF+BYEm9GJqPWyNT2LFx+Otwfx0ZZPH5GzsXYpo0bZ06wWqb5MDMXZDkq/gQpj148"
+        },
+        "stderr": {
+          "bytes": 237,
+          "sha256": "3b419c69ff321ee6851fa5489a2bb0c9a2ef093815a709dbd05391f89767267f",
+          "zlibBase64": "eJx9jjEOwkAMBPt7hUsokp9AQUF/4VaJBbGD7UPi91yUiA7qnZ3ddKkiLCPdYYIHOTA7hdIAqksX2pUc6FM6a8vsxTc4CVB2xuCRLVA25KYSmQX2D6pN1GTurOKUrQH7Ca2xzhUaWLIxfCtcTzTW5vgBT+9lfeZqdHhirsdvnVQoJnaa1KNPH6HdU9U="
+        },
+        "finishedAtUTC": "2026-11-05T06:31:38Z"
+      },
+      {
+        "label": "installed-workspace",
+        "args": [
+          "node",
+          "tests/browser.mjs"
+        ],
+        "startedAtUTC": "2026-11-05T06:31:38Z",
+        "completeEOF": true,
+        "exitCode": 1,
+        "processGroupGone": true,
+        "stdout": {
+          "bytes": 2143,
+          "sha256": "f7576c3207f2fd46d9600d9978723ffb9c2abc3cd07479afe79ddb247a10caa6",
+          "zlibBase64": "eJzlVU1v2zgQve+vIHTpRW4k6ovyYg+N60MWbRM4WfRQBAVFjmzGMqklqdhGkP++Q8tO45520e2pgA0b8/nmzRvpbvFuNv8wv/t6ubj+fDtffF3Mb64Xd388RWulZTSNvOUCOvCTxpqtAzsRKxBrF8WR4A5cNP3yFKkQeJmkaHSe+wGtUctVBxIt0mx1Z7gcQ49Vt8au285sJw/OaAxq9j7UqrIUS6w4LUoMEm2Wl1nOWcoYr/KmZqxIs7xO8a+gRV7lBS0rLiVrWcMa2ZSJFKws66apSvxEz/FLww2364DkW6+seN0rF6JMWQ1pTrNSli3Lecmrpi0rkeSyTtIaWJLnVU2Tom0SytMqY1khioyJlAN73etsuAlvPbJm4QGEBzlRm95Y//NGvsfFdMD10EfTp0gY7WHnZ51xuIyptwPEUW+NAOeutxqsW6lDoGlwt48gb67eI6gkjixsuNJKL0eLHroujgYtwHq0v5Ti7lC45Z2D5zgCa43FOebvZrP57ZT0YDfKOWU0kaAVyJiYHjR5cxFAXKRpQS9APypr9BukMPKb/ob71eXITY44lEZJdSil+c6DDpWuj1BPGORguUf7R8xIM5aHTRwVSf9nRbZJkgBlKIUkadqWikJmWSVYSqEWjCal4JDiF6hgRcWLOqUVbVPOiqLgWZn9F0UmCU2AZyKp27agtCypFDmrZVmyhgIKEDjNqobmLW2aOsNAYBhS1yCrFM57/YAif3zkX0+RHd+bwY/WgzRHpfUrfGIiFMcxdnLaSZCosKbrPivpV6iC+tADmfhmCKs8ZcOm9/tJpxrL7f5fJd9/dyOUsmA7MYUZx9OY0kCoHfTB2PMlzAN7Af198MCuP0hmAX8P4Py4llbt/GDhzKZwx9YOvX/ZxJkGDmzZcwkcdeG+Ewa3oP0Vbsorv/9LixXXy5P7+SAc035QGxUaf4nutoZY4B152dEETksigXDX49uMPJjBati7KUrArb3pCdeS9B3KiGiOI2/Jo4JtOIu3yPAiVBQrg8AsGa/FxeRKS9iBfH8ZJOWUwzYCYgJSBe+ft9efLj4eT5y8PHEOjXDUVtkNSGyPb1bEFrp8MsTzZsb7wGaMYwhjJao9fi3ZpeXaByeC3ROpcB4vVjHxZgg/zhsLxFiCvMhBhNKECwG95wgudJmNNE9EoBl9a222SNNygwyP6BAq0iYVAsBqe6JG8hWgG4uPuED+TlDiyMfsKmQ4cjxhZP4R4zHxbXT//Ns/v4/Gvg=="
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "zlibBase64": "eJwDAAAAAAE="
+        },
+        "finishedAtUTC": "2026-11-05T06:31:41Z"
+      }
+    ],
+    "guards": [
+      {
+        "stage": "before",
+        "files": [
+          {
+            "path": ".github/workflows/tracelet-acceptance.yml",
+            "mode": 420,
+            "bytes": 520,
+            "sha256": "3dba0cda4fa83761c4aab7db68ae87d9dc744354840e0820932ab62f4fbfe01f"
+          },
+          {
+            "path": ".gitignore",
+            "mode": 420,
+            "bytes": 95,
+            "sha256": "4b22e63d5c68b4b7ae5ddf984a9326a06e701ec22b8e86b7f3708cce93cef6e3"
+          },
+          {
+            "path": "AGENTS.md",
+            "mode": 420,
+            "bytes": 2109,
+            "sha256": "cfb57d1f5a12833319ce8326196f39a25af41412612e8d78af8dfd4e43c31f19"
+          },
+          {
+            "path": "LICENSE",
+            "mode": 420,
+            "bytes": 1072,
+            "sha256": "7edafcd8ebca4ecabedfad6e3c3d4872ce0ef6b49c3658a8b6e644cfb884d32d"
+          },
+          {
+            "path": "README.md",
+            "mode": 420,
+            "bytes": 3425,
+            "sha256": "0e249fb09655a3acd4177b506a38da59fd526a676e28f0cadcfdf8e8b3e21654"
+          },
+          {
+            "path": "docs/architecture.md",
+            "mode": 420,
+            "bytes": 3503,
+            "sha256": "74d6e54291bdd3ce2860e83f378cf827fb21783c692db907d36675ce130fa5d1"
+          },
+          {
+            "path": "docs/proposals/browser-checks.md",
+            "mode": 420,
+            "bytes": 2833,
+            "sha256": "cf39f3781b600ebcfd51d891539ee1bd7098b1687473a6245348b30f89eb783a"
+          },
+          {
+            "path": "docs/proposals/browser-checks.yml.example",
+            "mode": 420,
+            "bytes": 512,
+            "sha256": "f5e2db30f2ba9357363c57cbb95965092c78b6eda7612191eade91fb3252f090"
+          },
+          {
+            "path": "docs/proposals/focused-checks.md",
+            "mode": 420,
+            "bytes": 3255,
+            "sha256": "a7525a3830b66dc4d43b8c5afd1215e23e3dbcab7ae8f284ee5471a02606fe41"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.json",
+            "mode": 420,
+            "bytes": 1703,
+            "sha256": "0d9b35846fcedbab73d870905421a41dc512213d1057e1c3bdc654724df7e4db"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-1.md",
+            "mode": 420,
+            "bytes": 1132,
+            "sha256": "2db2ed35b638e37c5adce6dc0e4bd179e8580de5c6e96e671faecce8cb8f3aad"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.json",
+            "mode": 420,
+            "bytes": 22040,
+            "sha256": "d887c3ef9f03efb6e7d5833d4b6598484e13f2fc21f8deb69a68ace314112e03"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-2.md",
+            "mode": 420,
+            "bytes": 1553,
+            "sha256": "68bd284fc448f5d6e7886097fa666852d921920df2675f20e87761d7fc24fdf5"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-3.json",
+            "mode": 420,
+            "bytes": 35245,
+            "sha256": "5edfaad925943ea8f09ae0f0f556da2f064a7c11d9925f98af46897cf5cde3ba"
+          },
+          {
+            "path": "docs/results/2026/11-05/browser-attempt-3.md",
+            "mode": 420,
+            "bytes": 1906,
+            "sha256": "ce5f560164d9d4532481a478d2e067da75b9c19728a152b8980f37f75bb23895"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.json",
+            "mode": 420,
+            "bytes": 13997,
+            "sha256": "022e723a0ab1acb1c29dfad166973ebfdf6abf67ef28cb01b7b2b90f738b81fd"
+          },
+          {
+            "path": "docs/results/2026/11-05/local-checks.md",
+            "mode": 420,
+            "bytes": 2182,
+            "sha256": "1f52a2816cdb960f0a2ff6c3430c540e7e13dd049e320876390ea46596a9b652"
+          },
+          {
+            "path": "docs/spec.md",
+            "mode": 420,
+            "bytes": 4157,
+            "sha256": "36d264b32a6d599b77d99bd40f38ef4988756d368efe2e08035e42c64d810b28"
+          },
+          {
+            "path": "extension/content.js",
+            "mode": 420,
+            "bytes": 11671,
+            "sha256": "822b474cf5bec5a6f021c1720dde357f01246b3b73cc0ee40edb9b05a9f24b0a"
+          },
+          {
+            "path": "extension/lib/db.mjs",
+            "mode": 420,
+            "bytes": 7012,
+            "sha256": "dbcb85be63c5fb5e2b026d1e5a52c3be91926c63b27b184164cc68d654f1e0f1"
+          },
+          {
+            "path": "extension/lib/workflow.mjs",
+            "mode": 420,
+            "bytes": 6734,
+            "sha256": "ab415f56a2f7e4bc7ad2e8b28ece26fc65973cd281c785335b64659c8f686142"
+          },
+          {
+            "path": "extension/manifest.json",
+            "mode": 420,
+            "bytes": 805,
+            "sha256": "8fa9e7bfc9002ac42ced2596d63257c0ce915ff5a7163062c86669dbb0783033"
+          },
+          {
+            "path": "extension/offscreen.html",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "215a058679278816001dc51d94196422e95812b13b03cfe9d2730038d3e734fd"
+          },
+          {
+            "path": "extension/offscreen.mjs",
+            "mode": 420,
+            "bytes": 3967,
+            "sha256": "5fe62c73bd75d8283861290859ad79ec18812891b1c72481393948a373a42f50"
+          },
+          {
+            "path": "extension/popup.html",
+            "mode": 420,
+            "bytes": 2127,
+            "sha256": "e24b39fe27ede77239444f37e1a29fa695d92853e871ae38e968dd7d5b4ff001"
+          },
+          {
+            "path": "extension/popup.mjs",
+            "mode": 420,
+            "bytes": 2255,
+            "sha256": "581783586a3d2dbad11d77051e86a3d4f664f2b26ba9ce5956ce7f639f2cafe0"
+          },
+          {
+            "path": "extension/ui.css",
+            "mode": 420,
+            "bytes": 11316,
+            "sha256": "38352e5ca7a096d1dc2d1d2c5b87fa0d5bbbc8c106d616d661ef9447a54aafd9"
+          },
+          {
+            "path": "extension/worker.mjs",
+            "mode": 420,
+            "bytes": 11567,
+            "sha256": "6fbf5437cbfd932749fdb22f76e53cf223d8a16bab0afa63290d56907f81ff3e"
+          },
+          {
+            "path": "extension/workspace.html",
+            "mode": 420,
+            "bytes": 5127,
+            "sha256": "36b6009f16af0fdb29164585a66cc408a32968209e14ac546c4ef3f8b45210bf"
+          },
+          {
+            "path": "extension/workspace.mjs",
+            "mode": 420,
+            "bytes": 17492,
+            "sha256": "9fe89ffe7ea7dccfc520fdf2a1d369eaa3c56fb2761a6adf26566be9d5d50319"
+          },
+          {
+            "path": "package.json",
+            "mode": 420,
+            "bytes": 394,
+            "sha256": "952c94b19b26d674d1f439a589970a5d28e42d5bdd84d63fe20903f1ee2fbb8c"
+          },
+          {
+            "path": "scripts/browser-ci.py",
+            "mode": 420,
+            "bytes": 10180,
+            "sha256": "b5a145942706802468694514cc0ce08b944e553bcd3ec84945440bdd22f94370"
+          },
+          {
+            "path": "scripts/check.mjs",
+            "mode": 420,
+            "bytes": 7975,
+            "sha256": "6b2288f3c00801019e6f0a7f06d1e2db90eaa1cd55adf2a88760bad795e95f7d"
+          },
+          {
+            "path": "scripts/local-checks.py",
+            "mode": 420,
+            "bytes": 4842,
+            "sha256": "736ab4b96110f972c9b6bae1527ef5d7aec6e082b965b348b08f2759f802c04d"
+          },
+          {
+            "path": "scripts/package.mjs",
+            "mode": 420,
+            "bytes": 4595,
+            "sha256": "b9c05af48e3f584a2746f9fe1e520255a60236f797d2b27f2cc572d7fc9bfda1"
+          },
+          {
+            "path": "site/icon.svg",
+            "mode": 420,
+            "bytes": 173,
+            "sha256": "99e2ec50cd5a4f93d789882e234e140f13dbcce2bffa936e24227aa8596a876e"
+          },
+          {
+            "path": "site/index.html",
+            "mode": 420,
+            "bytes": 3609,
+            "sha256": "d9663c148ee3605176ec6a97e9994f75731097784c50b92269050334331d3c26"
+          },
+          {
+            "path": "site/style.css",
+            "mode": 420,
+            "bytes": 4244,
+            "sha256": "1a8a00604689d695febafeef0dc655d8850f97aa0314a9ffa77a284c6be29589"
+          },
+          {
+            "path": "tests/browser.mjs",
+            "mode": 420,
+            "bytes": 22221,
+            "sha256": "c21233ea6fcd3909aa965b727f4c945ed99f0a2aee2a4de17683ee27bf09d335"
+          },
+          {
+            "path": "tests/capture.browser.mjs",
+            "mode": 420,
+            "bytes": 24594,
+            "sha256": "ea94258d171f0e5ac56526b17852ef119f3c40690f8801887dc452d068facd6e"
+          },
+          {
+            "path": "tests/recording.test.mjs",
+            "mode": 420,
+            "bytes": 10828,
+            "sha256": "b38c9e905ebcacb3422a9bc698528714fa0b6dc3aa3a26014a27e901314c8595"
+          },
+          {
+            "path": "tests/workflow.test.mjs",
+            "mode": 420,
+            "bytes": 11362,
+            "sha256": "a9cb55bd63a0cec7af39f67434bf20fd9d1d79f5e7281e25d136a142c90f12b8"
+          },
+          {
+            "path": "vercel.json",
+            "mode": 420,
+            "bytes": 597,
+            "sha256": "f316845c7d65e20c8d3b8f59a1b808eab292e0eb36cc98ddc83a6c59927070e0"
+          }
+        ],
+        "matched": true
+      },
+      {
+        "stage": "before-browser",
+        "matched": true
+      },
+      {
+        "stage": "after-working-bytes",
+        "matched": true
+      },
+      {
+        "stage": "after-git-head-index-status-ignored",
+        "matched": true
+      }
+    ],
+    "cleanup": {
+      "commandGroupsGone": true,
+      "generatedOutputRemoved": true
+    },
+    "errors": [
+      "installed-workspace failed; preserved output belongs to this attempt",
+      "cleanup: Browser-owned residue retained: ['tracelet-B01-D7Tuz4', 'tracelet-B02-GjNBVM']"
+    ],
+    "head": "7696b247b9b7d8245b1f8efdae90ea70fbc16fa3",
+    "tree": "b462f1d9eb9e62e3b72c0639a0df3c0a91f14491",
+    "preparation": "c520bf24784777ca26a96f8b87e0602e1cd6d2e2",
+    "runtime": {
+      "node": "v24.21.0",
+      "playwright": "1.64.1"
+    },
+    "finishedAtUTC": "2026-11-05T06:31:41Z",
+    "interrupted": false,
+    "passed": false
+  },
+  "browser": {
+    "kind": "tracelet-browser-checks",
+    "cases": [
+      {
+        "id": "B01",
+        "status": "failed",
+        "downloads": [
+          {
+            "kind": "workflow-json",
+            "bytes": 731,
+            "sha256": "cf34634a8188a74b9885134914b9c254745267add8f8b8bdb60dc8669bb76b76"
+          },
+          {
+            "kind": "markdown",
+            "bytes": 351,
+            "sha256": "4cc6189e14236d6f84a6a7bf67c04d9019e804479205fb02a173835c538c1ae8"
+          },
+          {
+            "kind": "workflow-json-after-rejected-import",
+            "bytes": 731,
+            "sha256": "cf34634a8188a74b9885134914b9c254745267add8f8b8bdb60dc8669bb76b76"
+          }
+        ],
+        "cleanup": {
+          "contextClosed": true,
+          "processOwnership": {
+            "observedPIDs": 0,
+            "remainingPIDs": null,
+            "uncertain": true,
+            "passed": false
+          },
+          "error": "EACCES: permission denied, open '/proc/1152/environ'"
+        },
+        "tmpPathBytes": 40,
+        "installedExtensionObserved": true,
+        "durationMs": 1384
+      },
+      {
+        "id": "B02",
+        "status": "failed",
+        "downloads": [
+          {
+            "kind": "workflow-json",
+            "bytes": 731,
+            "sha256": "f000e28e8000bff2c5d337c812e9c8206cae1caee2c857a591272f1a8555a363"
+          },
+          {
+            "kind": "markdown",
+            "bytes": 351,
+            "sha256": "0020ea3c09ff522662dc489d668b2e2a1ea237b24f2bb933c0e82dc99ed71e63"
+          },
+          {
+            "kind": "workflow-json-after-rejected-import",
+            "bytes": 731,
+            "sha256": "f000e28e8000bff2c5d337c812e9c8206cae1caee2c857a591272f1a8555a363"
+          }
+        ],
+        "cleanup": {
+          "contextClosed": true,
+          "processOwnership": {
+            "observedPIDs": 0,
+            "remainingPIDs": null,
+            "uncertain": true,
+            "passed": false
+          },
+          "error": "EACCES: permission denied, open '/proc/1152/environ'"
+        },
+        "tmpPathBytes": 40,
+        "installedExtensionObserved": true,
+        "layoutObservations": [
+          {
+            "phase": "saved-workflow",
+            "scrollWidth": 390,
+            "innerWidth": 390
+          },
+          {
+            "phase": "empty-library",
+            "scrollWidth": 390,
+            "innerWidth": 390
+          }
+        ],
+        "durationMs": 1228
+      }
+    ],
+    "passed": 0,
+    "failed": 2,
+    "unrun": 0,
+    "pageErrors": [],
+    "unexpectedRequests": 0,
+    "fixtureRequests": 0,
+    "interrupted": false,
+    "cleanup": {
+      "serverClosed": true,
+      "contextsClosed": true,
+      "parentIdentityUnchanged": true
+    },
+    "proofLimits": [
+      "Two real installed-extension workspace journeys: desktop and plain narrow viewport.",
+      "Real chooser imports, IndexedDB persistence, edits, JSON/Markdown downloads and confirmed deletion.",
+      "No tabCapture, recording, permission grant, replay dispatch, touch, store or production acceptance.",
+      "Context-close acknowledgments and owned-directory identities are recorded; outer CI owns process inventory."
+    ]
+  },
+  "observedFailure": "Both real installed-extension journeys completed all UI assertions and six real downloads; narrow scrollWidth and innerWidth were both 390. Each context closed, but the cleanup scan tried reading unrelated pre-existing same-UID runner PID 1152 environ and received EACCES. Both cases correctly remained failed and profiles/scratch were retained. C01 was unrun.",
+  "nextCandidate": "Do not retry or privilege-read the blocked file. Establish a stat-only prelaunch PID/kernel-starttime baseline. Post-close ownership inspection covers new/reused identities; unchanged pre-existing unrelated identities are excluded. New-process permission uncertainty still retains/fails; all foreground/context/inode guards stay required.",
+  "causality": "The short path/current runtime allowed installation and UI journeys; the two simultaneous harness changes do not isolate the old SIGTRAP cause."
+}
