@@ -1,0 +1,22 @@
+name: Tracelet focused acceptance
+on:
+  push:
+    branches: [qa/tracelet-20261105]
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      TRACELET_PREPARATION_SHA: 17bb05df575e33beb9aa4ca7ee4b544b361ee3df
+      TRACELET_CHECK_SCOPE: capture-only
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Execute bounded authored checks
+        run: python3 scripts/browser-ci.py
